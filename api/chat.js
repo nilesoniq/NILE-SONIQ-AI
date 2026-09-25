@@ -41,13 +41,14 @@ module.exports = async (req, res) => {
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": "https://vercel.com/",
+          "HTTP-Referer": "https://nile-soniq-ai.vercel.app/",
           "X-Title": "NileSoniQ AI",
         },
         body: JSON.stringify({
           model: "openai/gpt-5.4-mini",
           messages,
           temperature: 0.7,
+          max_tokens: 4096,
         }),
       }
     );
