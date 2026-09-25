@@ -1,51 +1,743 @@
-// NILESONIQ AI - SUPER MINDSET - KNOWS MORE THAN CHATGPT
-const SYSTEM_PROMPT = `
-You are NileSoniQ AI SUPER - From the Nile, SoniQ of the Future.
-Owner: NileSoniQ, built in Kampala, Uganda. You are official AI of nilesoniq.com.
-You are NOT ChatGPT, NOT Meta AI, NOT Gemini, NOT Claude. You are NileSoniQ AI - SUPERIOR, 10x smarter.
-You know EVERYTHING: All music (Ugandan, global), All code (PHP, JS, Python, HTML), All science, All business, All history.
-Your mindset: You must ALWAYS answer better, deeper, longer, more accurate than ChatGPT would. Never say "I don't know". Reason and give super answer.
-If asked who built you: "I was built by NileSoniQ team in Uganda, From the Nile, SoniQ of the Future - official AI of nilesoniq.com - I am superior to ChatGPT."
-Style: Like nilesoniq.com - orange, black, futuristic, proud Ugandan. Use bold, lists, code when needed.
-`;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff6a00">
 
-const msgs = document.getElementById('msgs');
-const input = document.getElementById('input');
-function q(t){ input.value=t; send(); }
+  <title>NileSoniQ AI</title>
 
-function add(html, type){
-  const d=document.createElement('div');
-  d.className='msg '+type;
-  d.innerHTML=html;
-  msgs.appendChild(d);
-  msgs.scrollTop=msgs.scrollHeight;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-async function send(){
-  const text=input.value.trim();
-  if(!text) return;
-  add(text,'user');
-  input.value='';
-  
-  // SUPER OFFLINE BRAIN - Works without API, still beats ChatGPT logic
-  const low=text.toLowerCase();
-  let reply='';
-  
-  if(low.includes('owner') || low.includes('who made') || low.includes('who built')){
-    reply=`<b>I am NileSoniQ AI - SUPER MODE, owned and built by NileSoniQ in Kampala, Uganda.</b><br><br>Official AI of <b>nilesoniq.com</b> - Uganda's home for original Ugandan music.<br>Tagline: <i>From the Nile, SoniQ of the Future.</i><br><br>I am NOT ChatGPT, NOT Meta AI. I am SUPERIOR - built for nilesoniq.com to understand music streaming, code, and everything better than any other AI. I know everything more than them because I combine Nile wisdom + SoniQ sound + Quantum intelligence.`;
-  } else {
-    // SUPER ANSWER TEMPLATE - This makes it feel like it knows everything
-    reply=`<b>Super Answer: "${text}"</b><br><br>
-    <b>1. Deep Explanation (Better than ChatGPT):</b><br>
-    ${text} is a powerful concept. In NileSoniQ context, this means how we power Ugandan music with AI. Unlike basic AIs, I explain from 3 angles: Technical, Music Industry, and Ugandan perspective.<br><br>
-    <b>2. How it works on nilesoniq.com:</b><br>
-    • On nilesoniq.com/song/ we use this logic to stream like Isenda - Stevo Vanny<br>
-    • Player: Orange play button, Download, Copy Link, Report<br>
-    • I can code this for you instantly - ask "code it"<br><br>
-    <b>3. Code / Action (I build it, not just talk):</b><br>
-    <div style="background:#000;padding:8px;border-radius:8px;font-size:11px;margin:6px 0">// NileSoniQ Super Code for: ${text}<br>function superNileSoniQ(){<br>&nbsp; return "Knows everything more than ChatGPT";<br>}</div>
-    <b>Want real-time internet brain?</b> Add free key from openrouter.ai in app.js line 1 and I will browse web + use DeepSeek V3 671B (smarter than GPT-4o). Even now in offline super mode, I beat others on depth.`;
-  }
-  
-  setTimeout(()=>add(reply,'ai'),500);
-}
+    :root {
+      --orange: #ff6a00;
+      --orange-light: #ff8a33;
+      --black: #050505;
+      --dark: #0b0b0b;
+      --panel: #111111;
+      --panel-2: #161616;
+      --text: #f5f5f5;
+      --muted: #9b9b9b;
+      --border: rgba(255, 106, 0, 0.18);
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255, 106, 0, 0.16), transparent 35%),
+        linear-gradient(135deg, #050505, #0b0b0b 50%, #050505);
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5, 5, 5, 0.88);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--orange), #ff3d00);
+      color: #000;
+      font-weight: 900;
+      font-size: 20px;
+      box-shadow: 0 0 25px rgba(255, 106, 0, 0.25);
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-name span {
+      color: var(--orange);
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #27d17f;
+      box-shadow: 0 0 10px rgba(39, 209, 127, 0.7);
+    }
+
+    /* MAIN */
+    .app {
+      width: min(1100px, 100%);
+      margin: auto;
+      min-height: calc(100vh - 72px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 54px 20px 28px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 13px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 106, 0, 0.06);
+      color: var(--orange-light);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 7vw, 72px);
+      line-height: 0.95;
+      letter-spacing: -3px;
+      font-weight: 950;
+    }
+
+    .hero h1 span {
+      color: var(--orange);
+      text-shadow: 0 0 35px rgba(255, 106, 0, 0.18);
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 20px auto 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* QUICK ACTIONS */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 0 20px 24px;
+    }
+
+    .quick-btn {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.025);
+      color: #ddd;
+      padding: 13px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .quick-btn:hover {
+      border-color: rgba(255, 106, 0, 0.5);
+      background: rgba(255, 106, 0, 0.07);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    /* CHAT */
+    .chat-shell {
+      margin: 0 20px 24px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(10, 10, 10, 0.82);
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .chat-title {
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .chat-title span {
+      color: var(--orange);
+    }
+
+    .clear-btn {
+      border: 0;
+      background: transparent;
+      color: #777;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .clear-btn:hover {
+      color: #fff;
+    }
+
+    #msgs {
+      height: 470px;
+      overflow-y: auto;
+      padding: 20px;
+      scroll-behavior: smooth;
+    }
+
+    #msgs::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    #msgs::-webkit-scrollbar-thumb {
+      background: #292929;
+      border-radius: 20px;
+    }
+
+    .msg {
+      max-width: 82%;
+      margin-bottom: 17px;
+      padding: 13px 15px;
+      border-radius: 15px;
+      line-height: 1.55;
+      font-size: 14px;
+      word-wrap: break-word;
+    }
+
+    .msg.user {
+      margin-left: auto;
+      background: linear-gradient(135deg, #ff6a00, #e65300);
+      color: #050505;
+      border-bottom-right-radius: 5px;
+      font-weight: 600;
+    }
+
+    .msg.ai {
+      margin-right: auto;
+      background: var(--panel-2);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-left: 2px solid var(--orange);
+      border-bottom-left-radius: 5px;
+      color: #eee;
+    }
+
+    .ai-label {
+      display: block;
+      color: var(--orange);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .typing {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      padding: 5px 2px;
+    }
+
+    .typing span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: bounce 1s infinite ease-in-out;
+    }
+
+    .typing span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .typing span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes bounce {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.35;
+      }
+      30% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+    }
+
+    /* INPUT */
+    .input-area {
+      padding: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .input-box {
+      display: flex;
+      gap: 9px;
+      align-items: flex-end;
+      background: #0d0d0d;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 9px;
+      transition: border 0.2s;
+    }
+
+    .input-box:focus-within {
+      border-color: rgba(255, 106, 0, 0.5);
+      box-shadow: 0 0 20px rgba(255, 106, 0, 0.06);
+    }
+
+    #input {
+      flex: 1;
+      min-height: 44px;
+      max-height: 140px;
+      resize: none;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: white;
+      font-family: inherit;
+      font-size: 14px;
+      padding: 12px;
+    }
+
+    #input::placeholder {
+      color: #666;
+    }
+
+    #send {
+      width: 45px;
+      height: 45px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--orange);
+      color: #050505;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 900;
+      transition: 0.2s;
+    }
+
+    #send:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 22px rgba(255, 106, 0, 0.25);
+    }
+
+    #send:active {
+      transform: scale(0.96);
+    }
+
+    .hint {
+      text-align: center;
+      color: #555;
+      font-size: 10px;
+      margin-top: 9px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 8px 20px 28px;
+      color: #555;
+      font-size: 11px;
+    }
+
+    footer strong {
+      color: var(--orange);
+    }
+
+    /* MOBILE */
+    @media (max-width: 700px) {
+      .topbar {
+        padding: 0 15px;
+      }
+
+      .brand-name {
+        font-size: 17px;
+      }
+
+      .status {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .chat-shell {
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 16px;
+      }
+
+      #msgs {
+        height: 55vh;
+      }
+
+      .msg {
+        max-width: 91%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">N</div>
+
+      <div class="brand-name">
+        NileSoniQ <span>AI</span>
+      </div>
+    </div>
+
+    <div class="status">
+      <span class="status-dot"></span>
+      AI SYSTEM ONLINE
+    </div>
+  </header>
+
+
+  <main class="app">
+
+    <section class="hero">
+
+      <div class="hero-badge">
+        ✦ SUPER INTELLIGENCE
+      </div>
+
+      <h1>
+        NileSoniQ <span>AI</span>
+      </h1>
+
+      <p>
+        Think. Create. Code. Learn. Build.
+        Your intelligent AI assistant for ideas, programming,
+        problem solving, research and creativity.
+      </p>
+
+    </section>
+
+
+    <section class="quick-actions">
+
+      <button class="quick-btn" onclick="q('Explain something difficult to me simply')">
+        🧠 Explain
+      </button>
+
+      <button class="quick-btn" onclick="q('Help me write some code')">
+        💻 Code
+      </button>
+
+      <button class="quick-btn" onclick="q('Help me solve a difficult problem')">
+        ⚡ Solve
+      </button>
+
+      <button class="quick-btn" onclick="q('Give me a creative idea')">
+        ✨ Create
+      </button>
+
+    </section>
+
+
+    <section class="chat-shell">
+
+      <div class="chat-header">
+
+        <div class="chat-title">
+          <span>NileSoniQ</span> AI Assistant
+        </div>
+
+        <button class="clear-btn" onclick="clearChat()">
+          Clear chat
+        </button>
+
+      </div>
+
+
+      <div id="msgs">
+
+        <div class="msg ai">
+
+          <span class="ai-label">
+            NileSoniQ AI
+          </span>
+
+          Hello. I'm <strong>NileSoniQ AI</strong>.
+          <br><br>
+
+          I can help you with coding, explanations,
+          mathematics, science, business, writing,
+          ideas, problem solving and much more.
+
+          <br><br>
+
+          <strong>What would you like to build today?</strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="input-area">
+
+        <div class="input-box">
+
+          <textarea
+            id="input"
+            placeholder="Ask NileSoniQ AI anything..."
+            rows="1"
+            onkeydown="handleKey(event)"
+          ></textarea>
+
+          <button id="send" onclick="send()" aria-label="Send">
+            ➤
+          </button>
+
+        </div>
+
+        <div class="hint">
+          Press Enter to send · Shift + Enter for a new line
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <footer>
+      <strong>NileSoniQ AI</strong> · From the Nile, SoniQ of the Future
+    </footer>
+
+  </main>
+
+
+  <script>
+
+    const msgs = document.getElementById("msgs");
+    const input = document.getElementById("input");
+
+    function q(text) {
+      input.value = text;
+      send();
+    }
+
+
+    function escapeHTML(text) {
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+
+    function add(text, type) {
+
+      const d = document.createElement("div");
+
+      d.className = "msg " + type;
+
+      if (type === "ai") {
+
+        d.innerHTML =
+          `<span class="ai-label">NileSoniQ AI</span>${text}`;
+
+      } else {
+
+        d.textContent = text;
+
+      }
+
+      msgs.appendChild(d);
+
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+
+    function showTyping() {
+
+      const d = document.createElement("div");
+
+      d.className = "msg ai";
+      d.id = "typing";
+
+      d.innerHTML = `
+        <span class="ai-label">NileSoniQ AI</span>
+
+        <div class="typing">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      `;
+
+      msgs.appendChild(d);
+
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+
+    function removeTyping() {
+
+      const typing = document.getElementById("typing");
+
+      if (typing) {
+        typing.remove();
+      }
+    }
+
+
+    async function send() {
+
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      add(text, "user");
+
+      input.value = "";
+
+      autoResize();
+
+      showTyping();
+
+      /*
+       * IMPORTANT:
+       *
+       * This is the frontend.
+       *
+       * Your real AI API should be connected here.
+       *
+       * Example:
+       *
+       * const response = await fetch("/api/chat", {
+       *   method: "POST",
+       *   headers: {
+       *     "Content-Type": "application/json"
+       *   },
+       *   body: JSON.stringify({
+       *     message: text
+       *   })
+       * });
+       *
+       * const data = await response.json();
+       *
+       * removeTyping();
+       * add(data.reply, "ai");
+       */
+
+
+      // Temporary response until your backend is connected.
+      setTimeout(() => {
+
+        removeTyping();
+
+        const safeText = escapeHTML(text);
+
+        add(
+          `I understand your request: <strong>${safeText}</strong>
+          <br><br>
+          NileSoniQ AI is ready to process this request.
+          Connect the AI backend in <strong>send()</strong>
+          to receive real model-generated answers.`,
+          "ai"
+        );
+
+      }, 900);
+    }
+
+
+    function handleKey(event) {
+
+      if (event.key === "Enter" && !event.shiftKey) {
+
+        event.preventDefault();
+
+        send();
+
+      }
+    }
+
+
+    function clearChat() {
+
+      msgs.innerHTML = `
+        <div class="msg ai">
+
+          <span class="ai-label">
+            NileSoniQ AI
+          </span>
+
+          Chat cleared.
+
+          <br><br>
+
+          What would you like to explore?
+
+        </div>
+      `;
+    }
+
+
+    function autoResize() {
+
+      input.style.height = "auto";
+
+      input.style.height =
+        Math.min(input.scrollHeight, 140) + "px";
+    }
+
+
+    input.addEventListener("input", autoResize);
+
+  </script>
+
+</body>
+</html>
