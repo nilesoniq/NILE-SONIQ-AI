@@ -665,6 +665,13 @@ body {
     transform: scale(.95);
 }
 
+.send:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 .disclaimer {
     text-align: center;
 
@@ -880,6 +887,7 @@ body {
 
                     <button
                         class="send"
+                        id="sendButton"
                         onclick="send()"
                     >
                         ↑
@@ -921,6 +929,25 @@ const history =
 const sidebar =
     document.getElementById("sidebar");
 
+const sendButton =
+    document.getElementById("sendButton");
+
+
+/* =========================
+   CONVERSATION MEMORY
+========================= */
+
+/*
+   This stores the current conversation
+   in the browser while the page is open.
+
+   The API key is NOT stored here.
+*/
+
+let conversationHistory = [];
+
+let isSending = false;
+
 
 /* =========================
    MOBILE SIDEBAR
@@ -939,7 +966,7 @@ function toggleSidebar() {
 
 function escapeHTML(text) {
 
-    return text
+    return String(text)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -1070,7 +1097,13 @@ async function send() {
     const text =
         input.value.trim();
 
-    if (!text) return;
+    if (!text || isSending) {
+        return;
+    }
+
+    isSending = true;
+
+    sendButton.disabled = true;
 
     addMessage(text, "user");
 
@@ -1081,82 +1114,168 @@ async function send() {
     showTyping();
 
 
-    /*
-       =====================================
-       REAL AI CONNECTION GOES HERE
-       =====================================
+    try {
 
-       Later you can replace the temporary
-       response below with:
+        /*
+           Send the user's message and the
+           previous conversation to our Vercel
+           backend.
 
-       fetch("/api/chat", {
-           method: "POST",
-           headers: {
-               "Content-Type": "application/json"
-           },
-           body: JSON.stringify({
-               message: text
-           })
-       });
+           The private OpenRouter API key
+           NEVER appears in this HTML.
+        */
 
-       IMPORTANT:
-       Never put your private AI API key
-       directly inside this HTML file.
-    */
+        const response =
+            await fetch("/api/chat", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    message: text,
+
+                    history:
+                        conversationHistory.slice(-12)
+
+                })
+
+            });
 
 
-    setTimeout(() => {
+        let data;
+
+        try {
+
+            data =
+                await response.json();
+
+        } catch (jsonError) {
+
+            data = {
+                error:
+                    "The server returned an invalid response."
+            };
+
+        }
+
 
         removeTyping();
 
-        let answer =
-            "I received your message. NileSoniQ AI is ready to connect to its real AI model.";
 
-        const lower =
-            text.toLowerCase();
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "The AI request failed."
+            );
+
+        }
+
+
+        const reply =
+            data.reply;
 
 
         if (
-            lower.includes("hello") ||
-            lower.includes("hi") ||
-            lower.includes("hey")
+            !reply ||
+            typeof reply !== "string"
         ) {
 
-            answer =
-                "Hello 👋 I'm NileSoniQ AI. What would you like to explore today?";
+            throw new Error(
+                "The AI returned an empty response."
+            );
 
         }
 
-        else if (
-            lower.includes("who are you")
+
+        /*
+           Save both sides of the conversation
+           so follow-up questions have context.
+        */
+
+        conversationHistory.push({
+
+            role: "user",
+
+            content: text
+
+        });
+
+
+        conversationHistory.push({
+
+            role: "assistant",
+
+            content: reply
+
+        });
+
+
+        /*
+           Keep the browser history from becoming
+           unnecessarily large.
+        */
+
+        if (
+            conversationHistory.length > 20
         ) {
 
-            answer =
-                "I'm NileSoniQ AI — an AI assistant created for NileSoniQ. I can help with coding, explanations, problem solving, writing, ideas and much more.";
+            conversationHistory =
+                conversationHistory.slice(-20);
 
         }
 
-        else if (
-            lower.includes("code")
+
+        addMessage(
+            reply,
+            "ai"
+        );
+
+
+    } catch (error) {
+
+        removeTyping();
+
+        console.error(
+            "NileSoniQ AI error:",
+            error
+        );
+
+
+        let errorMessage =
+            "Sorry, I couldn't connect to NileSoniQ AI right now. Please try again.";
+
+
+        if (
+            error &&
+            error.message
         ) {
 
-            answer =
-                "Absolutely. Tell me what you want to build, which programming language you want to use, and what the program should do. I'll help you build it step by step.";
+            errorMessage =
+                "Sorry, NileSoniQ AI couldn't complete that request.\n\n" +
+                error.message;
 
         }
 
-        else if (
-            lower.includes("help")
-        ) {
 
-            answer =
-                "I'm ready. You can ask me to explain something, write or debug code, solve a problem, generate ideas, analyse information, or help you build a project.";
+        addMessage(
+            errorMessage,
+            "ai"
+        );
 
-        }
+    } finally {
 
-        addMessage(answer, "ai");
+        isSending = false;
 
-    }, 900);
+        sendButton.disabled = false;
+
+        input.focus();
+
+    }
 
 }
 
@@ -1214,8 +1333,13 @@ function scrollBottom() {
     setTimeout(() => {
 
         chat.scrollTo({
-            top: chat.scrollHeight,
-            behavior: "smooth"
+
+            top:
+                chat.scrollHeight,
+
+            behavior:
+                "smooth"
+
         });
 
     }, 30);
@@ -1228,6 +1352,17 @@ function scrollBottom() {
 ========================= */
 
 function newChat() {
+
+    /*
+       Clear the conversation memory.
+    */
+
+    conversationHistory = [];
+
+
+    /*
+       Reset the visual chat.
+    */
 
     messages.innerHTML = `
 
@@ -1252,17 +1387,27 @@ function newChat() {
 
     `;
 
+
     input.value = "";
 
     resizeInput();
 
+
     addHistoryItem();
+
 
     if (
         window.innerWidth <= 700
     ) {
-        sidebar.classList.remove("open");
+
+        sidebar.classList.remove(
+            "open"
+        );
+
     }
+
+
+    input.focus();
 
 }
 
@@ -1282,11 +1427,17 @@ function addHistoryItem() {
     item.textContent =
         "New conversation";
 
+
     history
         .querySelectorAll(".chat-item")
-        .forEach(el =>
-            el.classList.remove("active")
-        );
+        .forEach(el => {
+
+            el.classList.remove(
+                "active"
+            );
+
+        });
+
 
     history.prepend(item);
 
@@ -1301,21 +1452,40 @@ function loadChat(item) {
 
     history
         .querySelectorAll(".chat-item")
-        .forEach(el =>
-            el.classList.remove("active")
-        );
+        .forEach(el => {
 
-    item.classList.add("active");
+            el.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    item.classList.add(
+        "active"
+    );
+
 
     if (
         window.innerWidth <= 700
     ) {
-        sidebar.classList.remove("open");
+
+        sidebar.classList.remove(
+            "open"
+        );
+
     }
 
 }
 
+
+/* =========================
+   STARTUP
+========================= */
+
+input.focus();
+
 </script>
 
 </body>
-  </html>
+    </html>
