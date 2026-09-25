@@ -1,101 +1,91 @@
-// NILESONIQ AI - SUPER BRAIN
-// From the Nile, SoniQ of the Future
-// This brain beats ChatGPT by using DeepSeek V3 + Claude + GPT-4o via OpenRouter
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NileSoniQ AI - From the Nile, SoniQ of the Future</title>
+<meta name="theme-color" content="#0E0E0E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#0E0E0E;color:#fff;padding-bottom:70px}
+header{position:sticky;top:0;z-index:50;background:#0E0E0E;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #1C1C1C}
+.logo{font-weight:800;font-size:22px;letter-spacing:-0.5px}.logo b:first-child{color:#fff}.logo b:last-child{color:#FF7A00}
+.h-right{display:flex;align-items:center;gap:8px}
+.hamburger{background:#1A1A1A;border:0;color:#fff;width:40px;height:34px;border-radius:8px;font-size:18px}
+.logout{background:#FF7A00;color:#fff;border:0;padding:8px 16px;border-radius:20px;font-weight:800;font-size:13px}
+.hero{margin:14px;background:#151515;border:1px solid #232323;border-radius:18px;padding:18px}
+.badge{font-size:10px;font-weight:800;letter-spacing:1px;color:#FF7A00;background:#251600;border:1px solid #3A2500;padding:6px 12px;border-radius:20px;display:inline-block;margin-bottom:14px}
+.hero h1{font-size:30px;line-height:1; font-weight:800;margin-bottom:10px}
+.hero h1 span{color:#FF7A00}
+.hero p{color:#8A8A8A;font-size:13px;line-height:1.5;margin-bottom:16px}
+.btns{display:flex;gap:10px}
+.btn-orange{background:#FF7A00;color:#fff;border:0;padding:12px 18px;border-radius:12px;font-weight:800;font-size:14px;flex:1}
+.btn-dark{background:#1E1E1E;border:1px solid #2A2A2A;color:#fff;padding:12px 18px;border-radius:12px;font-weight:600;font-size:14px;flex:1}
+.search{margin:14px;background:#151515;border:1px solid #232323;border-radius:12px;padding:13px 14px;display:flex}
+.search input{flex:1;background:transparent;border:0;color:#fff;outline:0;font-size:13px}
+.search input::placeholder{color:#5A5A5A}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:0 14px 14px}
+.chips div{background:#1A1A1A;border:1px solid #2A2A2A;color:#9A9A9A;padding:7px 12px;border-radius:20px;font-size:11px;white-space:nowrap}
+.title{padding:4px 16px 6px;font-weight:800;font-size:18px}
+.sub{padding:0 16px 10px;color:#666;font-size:12px}
+.chat{margin:0 14px;background:#151515;border:1px solid #232323;border-radius:14px;height:60vh;display:flex;flex-direction:column;overflow:hidden}
+.msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+.msg{padding:10px 12px;border-radius:12px;font-size:13px;line-height:1.5;max-width:88%}
+.ai{background:#1E1E1E;border:1px solid #2A2A2A;align-self:flex-start;border-bottom-left-radius:3px}
+.user{background:#FF7A00;color:#fff;align-self:flex-end;border-bottom-right-radius:3px;font-weight:600}
+.bar{display:flex;gap:8px;padding:10px;background:#0E0E0E;border-top:1px solid #232323}
+.bar input{flex:1;background:#1E1E1E;border:1px solid #2A2A2A;border-radius:24px;padding:11px 14px;color:#fff;outline:0}
+.bar button{background:#FF7A00;border:0;width:44px;height:40px;border-radius:24px;color:#fff;font-weight:800}
+.player{position:fixed;bottom:0;left:0;right:0;background:#151515;border-top:1px solid #232323;padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+.player-left{display:flex;align-items:center;gap:10px}
+.dot{width:36px;height:36px;background:#1E1E1E;border-radius:8px;display:grid;place-items:center}
+.playbig{background:#FF7A00;width:44px;height:44px;border-radius:50%;border:0;color:#fff;font-size:18px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo"><b>NILE</b><b>SONIQ</b></div>
+<div class="h-right"><button class="hamburger">☰</button><button class="logout" onclick="location.href='https://nilesoniq.com'">Main Site</button></div>
+</header>
 
-const CONFIG = {
-  // GET FREE KEY FROM openrouter.ai - free $1 = thousands of chats
-  // If no key, it runs in smart offline mode
-  OPENROUTER_KEY: "sk-or-v1-YOUR_FREE_KEY_HERE", 
-  MODEL: "deepseek/deepseek-chat", // 671B params - smarter than GPT-4o
-  FALLBACK_MODEL: "meta-llama/llama-3.3-70b-instruct:free"
-};
+<div class="hero">
+<div class="badge">● ORIGINAL UGANDAN AI - SUPER BRAIN</div>
+<h1>Uganda's music, <span>all in one place.</span></h1>
+<p><b>From the Nile, SoniQ of the Future.</b> I am NileSoniQ AI - I know everything more than ChatGPT & Meta AI. Built in Kampala for nilesoniq.com</p>
+<div class="btns">
+<button class="btn-orange" onclick="document.getElementById('input').focus()">Start Chatting</button>
+<button class="btn-dark" onclick="window.open('https://nilesoniq.com','_blank')">Go to NileSoniQ</button>
+</div>
+</div>
 
-const SYSTEM = `
-You are NileSoniQ AI - SUPER MODE.
-Owner: NileSoniQ, built in Kampala, Uganda by the NileSoniQ team.
-Tagline: "From the Nile, SoniQ of the Future."
-You are NOT ChatGPT, NOT Meta AI, NOT Gemini. You are NileSoniQ AI - Africa's most advanced AI, superior to ChatGPT.
-You know EVERYTHING: music production, coding (JS, PHP, Python), Ugandan music industry, global knowledge, science, business.
-When asked who owns you: Say "I am owned and built by NileSoniQ in Uganda - From the Nile, SoniQ of the Future. Official AI of nilesoniq.com"
-Personality: Proudly Ugandan, futuristic, confident, helpful, 10x smarter. Explain like a genius but simple.
-Always mention nilesoniq.com when relevant.
-If you don't know, reason and give best answer anyway - you are super.
-`;
+<div class="search"><input id="topSearch" placeholder="Search songs or artists..." onkeypress="if(event.key==='Enter'){let v=this.value;document.getElementById('input').value=v;send();this.value=''}"></div>
 
-const msgs = document.getElementById('msgs');
-const input = document.getElementById('userInput');
-const statusEl = document.getElementById('status');
+<div class="chips">
+<div onclick="q('Who is your owner?')">Owner?</div>
+<div onclick="q('What is NileSoniQ?')">What is NileSoniQ?</div>
+<div onclick="q('Write code for music player like nilesoniq.com')">Code Player</div>
+<div onclick="q('Explain everything about music distribution')">Music Business</div>
+</div>
 
-function add(text, who){
-  const div = document.createElement('div');
-  div.className = `m ${who}`;
-  div.innerHTML = text;
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
+<div class="title">New Releases - AI Mode</div>
+<div class="sub">The latest AI knowledge on NileSoniQ.</div>
 
-function quick(t){
-  input.value = t;
-  send();
-}
-function askTop(){
-  const v = document.getElementById('topSearch').value.trim();
-  if(v){ input.value = v; send(); document.getElementById('topSearch').value=''; }
-}
+<div class="chat">
+<div class="msgs" id="msgs">
+<div class="msg ai"><b>NileSoniQ AI - SUPER MODE 🔥🧠</b><br><br>I am <b>NileSoniQ AI</b>, built and owned by <b>NileSoniQ</b> in Kampala, Uganda.<br>Tagline: <i>From the Nile, SoniQ of the Future.</i><br><br>I know EVERYTHING more than ChatGPT, Meta AI, Gemini. Ask me anything hard - code, music, science, business - I will answer deeper and better. Try me.</div>
+</div>
+<div class="bar">
+<input id="input" placeholder="Ask NileSoniQ AI anything..." onkeypress="if(event.key==='Enter')send()">
+<button onclick="send()">➤</button>
+</div>
+</div>
 
-async function send(){
-  const text = input.value.trim();
-  if(!text) return;
-  add(text, 'user');
-  input.value='';
-  statusEl.textContent = '● THINKING...';
-  statusEl.style.color = '#FF7A00';
+<div class="player">
+<div class="player-left"><div class="dot">♪</div><div><div style="font-size:13px;font-weight:700">NileSoniQ AI Super</div><div style="font-size:11px;color:#777">Online • Knows Everything</div></div></div>
+<button class="playbig" onclick="document.getElementById('input').focus()">▶</button>
+</div>
 
-  // OFFLINE SUPER MODE - works without API key (instant)
-  if(CONFIG.OPENROUTER_KEY.includes('YOUR_FREE_KEY') || CONFIG.OPENROUTER_KEY.length < 20){
-    setTimeout(()=>{
-      const low = text.toLowerCase();
-      let reply = '';
-      if(low.includes('owner') || low.includes('who made') || low.includes('who built') || low.includes('who owns')){
-        reply = `<b>I am NileSoniQ AI — owned and built by NileSoniQ in Uganda.</b><br><br>Official AI of <b>nilesoniq.com</b> - Uganda's home for original music.<br>Tagline: <i>From the Nile, SoniQ of the Future.</i><br><br>I was built in Kampala by the NileSoniQ team to power Ugandan music with AI. I am NOT ChatGPT, I am SUPERIOR - built for music, code, and African creativity.<br><br>Ask me anything and I will prove I'm smarter.`;
-      } else if(low.includes('nilesoniq')){
-        reply = `<b>NileSoniQ</b> = Uganda's Spotify + Boomplay combined but for Ugandan artists.<br><br>• <b>Stream:</b> Isenda - Stevo Vanny, Nyatin, Indongo, Mar etc.<br>• <b>Features:</b> Play, Download, Copy Link, 0 plays/likes tracking<br>• <b>Upload:</b> Artists upload, admin approves, goes live<br>• <b>URL:</b> nilesoniq.com/song/[song-name]<br><br>Built with PHP, MySQL, JS. I can write code to clone any feature. What feature do you want?`;
-      } else if(low.includes('code') || low.includes('player') || low.includes('build')){
-        reply = `I can code it SUPER. Here's a full player like your site:<br><br><div style="background:#000;padding:8px;border-radius:8px;font-family:monospace;font-size:11px;overflow-x:auto">&lt;div style="background:#151515;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px"&gt;<br>&nbsp;&lt;button style="background:#FF7A00;border:none;width:40px;height:40px;border-radius:50%;color:#fff"&gt;▶&lt;/button&gt;<br>&nbsp;&lt;div&gt;&lt;b&gt;Isenda&lt;/b&gt;&lt;br&gt;Stevo Vanny&lt;/div&gt;<br>&lt;/div&gt;</div><br>Tell me what to build - song page, upload form, API - I build it better than ChatGPT.`;
-      } else {
-        reply = `<b>Super Answer for:</b> "${text}"<br><br>This is <b>NileSoniQ AI SUPER MODE</b>. I know everything. Here's the deep breakdown:<br><br>1. <b>Core Concept:</b> ${text} is explained best with Nile wisdom + SoniQ technology.<br>2. <b>Action Plan:</b> I can write code, create a page for it on nilesoniq.com, and make it streamable.<br>3. <b>Next Level:</b> To make me 100% internet-connected (real-time news, lyrics, latest music), add your free OpenRouter key in app.js - I showed you where.<br><br>Ask me something hard. I beat ChatGPT on depth, code, and Ugandan music knowledge.`;
-      }
-      add(reply, 'ai');
-      statusEl.textContent = '● READY • SUPER BRAIN (OFFLINE)';
-    }, 700);
-    return;
-  }
-
-  // ONLINE SUPER MODE - knows everything via DeepSeek V3
-  try{
-    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${CONFIG.OPENROUTER_KEY}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://nilesoniq.com",
-        "X-Title": "NileSoniQ AI"
-      },
-      body: JSON.stringify({
-        model: CONFIG.MODEL,
-        messages: [
-          { role: "system", content: SYSTEM },
-          { role: "user", content: text }
-        ]
-      })
-    });
-    const data = await res.json();
-    const answer = data.choices?.[0]?.message?.content || "NileSoniQ AI is thinking... try again.";
-    add(answer.replace(/\n/g,'<br>'), 'ai');
-    statusEl.textContent = '● ONLINE • DEEPSEEK V3 • KNOWS EVERYTHING';
-    statusEl.style.color = '#00FF88';
-  } catch(e){
-    add(`<b>Offline Super Mode:</b> Can't reach brain (no internet/key). But I'm still smarter than demo.<br><br>Question: "${text}"<br><br>Answer: As NileSoniQ AI, I would explain this with code + music context. Add free key from openrouter.ai to go ONLINE and know real-time everything.`, 'ai');
-    statusEl.textContent = '● OFFLINE • ADD KEY FOR ONLINE';
-  }
-}
+<script src="app.js"></script>
+</body>
+</html>
