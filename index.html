@@ -3,148 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NileMix — Project Mixer</title>
+<title>NileSoniq AI — Projects, Not Audios</title>
+<link rel="icon" href="https://nilesoniq.github.io/favicon.ico">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Arial}
-body{background:#0a0a0a;color:#fff;min-height:100vh;padding:20px}
-.container{max-width:900px;margin:0 auto}
-h1{font-size:32px;margin:20px 0 5px} h1 span{color:#a3ff12}
-.sub{color:#888;margin-bottom:30px}
-.card{background:#151515;border:1px solid #222;border-radius:16px;padding:20px;margin-bottom:20px}
-label{color:#aaa;font-size:13px;display:block;margin:12px 0 6px}
-input,textarea{width:100%;background:#0f0f0f;border:1px solid #333;color:#fff;padding:12px;border-radius:10px}
-input[type=file]{padding:8px}
-button{background:#a3ff12;color:#000;border:0;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer;width:100%;margin-top:15px;font-size:16px}
-button:disabled{opacity:.5}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.log{background:#000;padding:12px;border-radius:8px;font-family:monospace;font-size:12px;white-space:pre-wrap;color:#a3ff12;margin-top:12px;max-height:200px;overflow:auto}
-.project{border:1px solid #333;padding:12px;border-radius:10px;margin-top:10px;display:flex;justify-content:space-between;align-items:center}
-a{color:#a3ff12;text-decoration:none}
-.badge{background:#222;padding:4px 8px;border-radius:20px;font-size:11px}
+:root{--lime:#a3ff12;--bg:#080808;--card:#141414;--border:#222}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui}
+body{background:var(--bg);color:#fff}
+header{padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+.logo{font-weight:900;font-size:22px}.logo span{color:var(--lime)}
+.nav a{color:#888;margin-left:20px;text-decoration:none;font-size:14px}.nav a.active{color:#fff}
+.hero{max-width:1200px;margin:40px auto;padding:0 20px;display:grid;grid-template-columns:1.2fr.8fr;gap:30px}
+h1{font-size:48px;line-height:.95;letter-spacing:-2px} h1 span{color:var(--lime)}
+.hero p{color:#888;margin:15px 0;line-height:1.6}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px}
+label{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;display:block;margin:14px 0 6px}
+input,select{width:100%;background:#0f0f0f;border:1px solid #2a2a2a;color:#fff;padding:13px;border-radius:12px}
+button{background:var(--lime);color:#000;border:0;padding:14px;border-radius:12px;font-weight:800;cursor:pointer;width:100%;margin-top:16px}
+button.sec{background:#222;color:#fff}
+.drop{border:2px dashed #333;border-radius:16px;padding:30px;text-align:center;color:#666;margin-top:10px;cursor:pointer}
+.drop.dragover{border-color:var(--lime);color:var(--lime);background:#a3ff1211}
+.log{background:#000;border-radius:12px;padding:12px;font-family:monospace;font-size:11px;color:var(--lime);margin-top:12px;max-height:180px;overflow:auto;display:none}
+.grid{max-width:1200px;margin:20px auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.project-card{padding:14px;border:1px solid #222;border-radius:14px;background:#111}
+.badge{background:#222;color:#aaa;padding:4px 8px;border-radius:20px;font-size:10px}
 audio{width:100%;margin-top:10px}
+@media(max-width:900px){.hero,.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>NileMix <span>Projects, not audios</span></h1>
-  <p class="sub">Upload FL / Logic / Ableton project → get back mixed project + master audio. GitHub-powered version control.</p>
 
-  <div class="card">
-    <h3>1. Upload New Project</h3>
-    <div class="row">
-      <div><label>Song Name</label><input id="songName" placeholder="Ghetto Love"></div>
-      <div><label>Artist Name</label><input id="artist" placeholder="Kato"></div>
-    </div>
-    <label>Project ZIP (export stems +.flp/.logicx)</label>
-    <input type="file" id="projectFile" accept=".zip,.flp,.logicx,.als,.rar">
-    <label>Version Message</label><input id="message" placeholder="Initial drums + bass">
-    <button id="uploadBtn" onclick="upload()">Upload to GitHub →</button>
-    <div id="uploadLog" class="log" style="display:none"></div>
+<header>
+  <div class="logo">NILE<span>SONIQ</span> AI</div>
+  <div class="nav">
+    <a href="https://nile-soniq-u5hh.vercel.app" target="_blank">Main App</a>
+    <a class="active" href="#">Project Mixer</a>
+    <a href="https://github.com/nilesoniq/NILE-SONIQ-AI">GitHub</a>
   </div>
+</header>
 
-  <div class="card">
-    <h3>2. Add New Version (collab)</h3>
-    <label>Existing Repo Name (from upload result)</label><input id="repoName" placeholder="nilesoniq-ghetto-love-...">
-    <label>New Project ZIP</label><input type="file" id="projectFile2" accept=".zip,.flp,.logicx">
-    <div class="row">
-      <div><label>Artist</label><input id="artist2" placeholder="Maria - vocals"></div>
-      <div><label>Message</label><input id="message2" placeholder="Added hook vocals"></div>
-    </div>
-    <button onclick="addVersion()" style="background:#fff">Add Version + Auto-Mix</button>
-    <div id="versionLog" class="log" style="display:none"></div>
-  </div>
+<div class="hero">
+  <div>
+    <h1>MIX <span>PROJECTS</span><br>NOT JUST<br>AUDIOS</h1>
+    <p>Upload your FL Studio, Logic Pro, Ableton project. We auto-mix & master and give you back <b>full editable project + final WAV</b>. GitHub version control for every song.</p>
 
-  <div class="card">
-    <h3>3. Your Projects</h3>
-    <div id="projectsList"><p style="color:#666">Upload first project to see here. Or enter repo name above and click Load.</p></div>
-    <div style="margin-top:15px">
-      <label>Load repo to view files</label>
-      <div class="row"><input id="loadRepo" placeholder="repo name"><button onclick="loadProject()" style="margin:0">Load</button></div>
+    <div class="card" style="margin-top:20px">
+      <h3>Upload Project</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><label>Song Name</label><input id="songName" placeholder="Ghetto Love"></div>
+        <div><label>Artist</label><input id="artist" placeholder="Kato Music"></div>
+      </div>
+      <label>Project File (ZIP with FLP/Logic + stems)</label>
+      <div class="drop" id="drop" onclick="document.getElementById('file').click()">
+        <div id="dropText">Drop ZIP here or click to browse<br><small>Supports.zip,.flp,.logicx,.als</small></div>
+        <input type="file" id="file" hidden accept=".zip,.flp,.logicx,.als,.rar,.flac,.wav">
+      </div>
+      <div id="fileName" style="margin-top:10px;color:var(--lime);font-size:13px"></div>
+      <label>Version Note</label><input id="msg" placeholder="v1: drums + bassline">
+      <button id="upBtn" onclick="uploadProject()">Upload to GitHub & Mix →</button>
+      <div id="upLog" class="log"></div>
     </div>
   </div>
 
-  <div class="card">
-    <h3>Output — What you get back</h3>
-    <p style="color:#aaa;font-size:14px;line-height:1.5">
-      After upload, Worker creates private GitHub repo:<br>
-      • <b>Master.wav</b> — final loudness mastered<br>
-      • <b>Mix.wav</b> — mixed<br>
-      • <b>NileMix.dawproject</b> — editable project with mixer settings (opens in FL 24+, Logic 11+, Ableton 12)<br>
-      • <b>versions.json</b> — Git-like history<br>
-      • Original ZIP untouched
-    </p>
-    <audio controls id="player" style="display:none"></audio>
+  <div>
+    <div class="card">
+      <h3>What You Get Back</h3>
+      <div style="font-size:13px;color:#888;line-height:1.7;margin-top:10px">
+        ✓ <b style="color:#fff">Master.wav</b> (-14 LUFS, radio-ready)<br>
+        ✓ <b style="color:#fff">Mix.wav</b> (unmastered)<br>
+        ✓ <b style="color:#fff">NileMix.dawproject</b> — opens in FL 24+, Logic 11, Ableton 12, Studio One (editable mixer)<br>
+        ✓ <b style="color:#fff">Mixed Stems/</b> — each stem after EQ/comp<br>
+        ✓ <b style="color:#fff">Original/</b> — your untouched project<br>
+        ✓ <b style="color:#fff">versions.json</b> — Git history
+      </div>
+      <div style="margin-top:15px;padding:12px;background:#000;border-radius:12px">
+        <label style="margin:0 0 6px">Preview Master</label>
+        <audio controls id="audioPlayer"></audio>
+        <button class="sec" id="dlBtn" style="display:none">Download Full Project ZIP</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <h3>Add Version / Collab</h3>
+      <label>Repo Name (from previous upload)</label><input id="repoName" placeholder="nilesoniq-ghetto-love-...">
+      <label>Collab File</label><input type="file" id="file2">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><label>Artist</label><input id="artist2" placeholder="Maria"></div>
+        <div><label>Note</label><input id="msg2" placeholder="Added vocals"></div>
+      </div>
+      <button class="sec" onclick="addVersion()">Add v2 + Auto-Merge</button>
+      <div id="vLog" class="log"></div>
+    </div>
   </div>
 </div>
 
+<div class="grid" id="projectsGrid"></div>
+
 <script>
-// CHANGE THIS TO YOUR WORKER URL
-const WORKER_URL = "https://nilemix-github.YOUR_SUBDOMAIN.workers.dev";
+// CONFIG - CHANGE THESE
+const WORKER_URL = "https://nilemix-github.YOUR_SUBDOMAIN.workers.dev"; // <-- put your worker URL
+const GITHUB_USER = "nilesoniq";
 
-async function upload(){
-  const btn = document.getElementById('uploadBtn');
-  const log = document.getElementById('uploadLog');
-  const file = document.getElementById('projectFile').files[0];
-  if(!file) return alert("Select ZIP file");
+const drop = document.getElementById('drop');
+const fileInput = document.getElementById('file');
 
-  btn.disabled=true; btn.textContent="Uploading to GitHub...";
-  log.style.display="block"; log.textContent="Creating private repo...\n";
+drop.addEventListener('dragover', e=>{e.preventDefault(); drop.classList.add('dragover')});
+drop.addEventListener('dragleave', ()=>drop.classList.remove('dragover'));
+drop.addEventListener('drop', e=>{e.preventDefault(); drop.classList.remove('dragover'); fileInput.files=e.dataTransfer.files; showFile()});
+fileInput.addEventListener('change', showFile);
 
-  const fd = new FormData();
-  fd.append("songName", document.getElementById('songName').value || "untitled");
-  fd.append("artist", document.getElementById('artist').value || "unknown");
-  fd.append("message", document.getElementById('message').value || "Initial upload");
-  fd.append("project", file);
+function showFile(){
+  const f=fileInput.files[0];
+  if(f) document.getElementById('fileName').textContent=`📦 ${f.name} — ${(f.size/1024/1024).toFixed(2)} MB`;
+}
+
+async function uploadProject(){
+  const f=fileInput.files[0];
+  if(!f) return alert("Select ZIP");
+  const btn=document.getElementById('upBtn'), log=document.getElementById('upLog');
+  btn.disabled=true; btn.textContent="Creating GitHub repo..."; log.style.display="block"; log.textContent="Uploading...\n";
+
+  const fd=new FormData();
+  fd.append("songName",document.getElementById('songName').value||"untitled");
+  fd.append("artist",document.getElementById('artist').value||"unknown");
+  fd.append("message",document.getElementById('msg').value||"v1");
+  fd.append("project",f);
 
   try{
-    const res = await fetch(`${WORKER_URL}/upload`, { method:"POST", body: fd });
-    const data = await res.json();
-    log.textContent += JSON.stringify(data,null,2);
-    if(data.repo){
-      document.getElementById('repoName').value = data.repoName;
-      document.getElementById('loadRepo').value = data.repoName;
-      log.textContent += `\n\n✅ DONE! Repo: ${data.repo}\nCopy repoName for collab.`;
-      loadProject(data.repoName);
+    const r=await fetch(`${WORKER_URL}/upload`,{method:"POST",body:fd});
+    const d=await r.json();
+    log.textContent+=JSON.stringify(d,null,2);
+    if(d.repoName){
+      document.getElementById('repoName').value=d.repoName;
+      localStorage.setItem('lastRepo',d.repoName);
+      log.textContent+=`\n\n✅ Repo: ${d.repo}\nYou can now add versions.`;
+      // Try load preview if master exists later
     }
-  }catch(e){ log.textContent += "\n❌ Error: "+e.message; }
-  btn.disabled=false; btn.textContent="Upload to GitHub →";
+  }catch(e){log.textContent+="\n❌ "+e.message+"\nCheck WORKER_URL in code."}
+  btn.disabled=false; btn.textContent="Upload to GitHub & Mix →";
 }
 
 async function addVersion(){
-  const log = document.getElementById('versionLog');
-  const file = document.getElementById('projectFile2').files[0];
-  const repoName = document.getElementById('repoName').value;
-  if(!file ||!repoName) return alert("Need repo name + file");
-  log.style.display="block"; log.textContent="Adding version...\n";
-
-  const fd = new FormData();
-  fd.append("repoName", repoName);
-  fd.append("artist", document.getElementById('artist2').value || "unknown");
-  fd.append("message", document.getElementById('message2').value || "New version");
-  fd.append("project", file);
-
+  const f=document.getElementById('file2').files[0];
+  const repo=document.getElementById('repoName').value;
+  if(!f||!repo) return alert("Need repo + file");
+  const log=document.getElementById('vLog'); log.style.display="block"; log.textContent="Merging...\n";
+  const fd=new FormData();
+  fd.append("repoName",repo); fd.append("artist",document.getElementById('artist2').value||"collab");
+  fd.append("message",document.getElementById('msg2').value||"v2"); fd.append("project",f);
   try{
-    const res = await fetch(`${WORKER_URL}/add-version`, { method:"POST", body: fd });
-    const data = await res.json();
-    log.textContent += JSON.stringify(data,null,2);
-    log.textContent += "\n\n✅ Merged! Auto-mix triggered.";
-  }catch(e){ log.textContent += "\n❌ "+e.message; }
+    const r=await fetch(`${WORKER_URL}/add-version`,{method:"POST",body:fd});
+    const d=await r.json(); log.textContent+=JSON.stringify(d,null,2);
+  }catch(e){log.textContent+=e.message}
 }
 
-async function loadProject(name){
-  const repoName = name || document.getElementById('loadRepo').value;
-  if(!repoName) return;
-  const list = document.getElementById('projectsList');
-  list.innerHTML = "Loading...";
-  try{
-    const res = await fetch(`${WORKER_URL}/project?repo=${repoName}`);
-    const data = await res.json();
-    list.innerHTML = `<div class="project"><div><b>${repoName}</b><br><span class="badge">${data.files?.length||0} versions</span></div><a href="${data.repo}" target="_blank">Open GitHub →</a></div>`;
-    if(data.files) data.files.forEach(f=>{
-      list.innerHTML += `<div class="project"><span>${f.name}</span><span class="badge">${f.type}</span></div>`;
-    });
-  }catch(e){ list.innerHTML = "Error: "+e.message; }
-}
+// Auto-load last repo
+window.addEventListener('load',()=>{
+  const last=localStorage.getItem('lastRepo');
+  if(last) document.getElementById('repoName').value=last;
+});
 </script>
 </body>
 </html>
