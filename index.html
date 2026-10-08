@@ -1,13 +1,24 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NILE SONIQ AI — Project Mixer</title><meta
-name="description"
-content="NILE SONIQ AI Project Mixer — Upload your audio or full DAW project and get professional mixing and mastering."
-
-«»
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NILE SONIQ AI — Project Mixer</title><meta name="description"
+content="NILE SONIQ AI Project Mixer — Upload your audio or full DAW project and get professional mixing and mastering.">
 
 <style>
+
+/* =====================================================
+   FORCE DARK THEME
+===================================================== */
+
+html,
+body{
+  background:#090909 !important;
+  color:#ffffff !important;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 *{
   box-sizing:border-box;
@@ -15,37 +26,51 @@ content="NILE SONIQ AI Project Mixer — Upload your audio or full DAW project a
   padding:0;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#090909;
-  color:#fff;
+  font-family:Arial,Helvetica,sans-serif !important;
   min-height:100vh;
+  background-color:#090909 !important;
+  color:#ffffff !important;
 }
 
-a{
+body *{
   color:inherit;
-  text-decoration:none;
+}
+
+button,
+input,
+textarea,
+select{
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 button{
   border:0;
   cursor:pointer;
-  font-family:inherit;
   font-weight:700;
 }
 
+a{
+  color:#ffffff;
+  text-decoration:none;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
 header{
-  background:#111;
+  background:#111111 !important;
+  color:#ffffff !important;
   border-bottom:1px solid #292929;
+
   padding:18px 6%;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:20px;
+
   position:sticky;
   top:0;
   z-index:100;
@@ -54,7 +79,7 @@ header{
 .logo{
   font-size:22px;
   font-weight:800;
-  color:#ff7a00;
+  color:#ff7a00 !important;
   white-space:nowrap;
 }
 
@@ -65,12 +90,12 @@ nav{
 }
 
 nav a{
-  color:#ddd;
+  color:#dddddd !important;
   font-size:14px;
 }
 
 nav a:hover{
-  color:#ff7a00;
+  color:#ff7a00 !important;
 }
 
 .auth-buttons{
@@ -78,6 +103,10 @@ nav a:hover{
   gap:10px;
   align-items:center;
 }
+
+/* =====================================================
+   BUTTONS
+===================================================== */
 
 .btn{
   padding:11px 18px;
@@ -87,25 +116,34 @@ nav a:hover{
 }
 
 .btn-orange{
-  background:#ff7a00;
-  color:#000;
+  background:#ff7a00 !important;
+  color:#000000 !important;
 }
 
 .btn-orange:hover{
-  background:#ff941f;
+  background:#ff941f !important;
+  color:#000000 !important;
 }
 
 .btn-dark{
-  background:#222;
-  color:#fff;
-  border:1px solid #444;
+  background:#222222 !important;
+  color:#ffffff !important;
+  border:1px solid #444444;
 }
 
 .btn-dark:hover{
-  background:#2c2c2c;
+  background:#2d2d2d !important;
+  color:#ffffff !important;
 }
 
+/* =====================================================
+   HERO
+===================================================== */
+
 .hero{
+  background:#090909 !important;
+  color:#ffffff !important;
+
   padding:95px 6% 70px;
   text-align:center;
   max-width:1100px;
@@ -113,17 +151,18 @@ nav a:hover{
 }
 
 .hero h1{
+  color:#ffffff !important;
   font-size:56px;
   line-height:1.05;
   margin-bottom:20px;
 }
 
 .hero h1 span{
-  color:#ff7a00;
+  color:#ff7a00 !important;
 }
 
 .hero p{
-  color:#bbb;
+  color:#bbbbbb !important;
   font-size:18px;
   max-width:720px;
   margin:0 auto 32px;
@@ -137,45 +176,59 @@ nav a:hover{
   flex-wrap:wrap;
 }
 
-/* HOMEPAGE UPLOAD BUTTONS */
+/* =====================================================
+   HOMEPAGE UPLOAD BUTTONS
+===================================================== */
 
 .home-upload{
   max-width:850px;
   margin:32px auto 0;
+
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:15px;
 }
 
 .home-upload-btn{
-  background:#111;
-  border:1px solid #333;
+  display:block;
+  width:100%;
+
+  background:#111111 !important;
+  color:#ffffff !important;
+
+  border:1px solid #333333;
   border-radius:12px;
+
   padding:20px;
-  color:#fff;
+
   text-align:left;
+
   transition:.2s;
 }
 
 .home-upload-btn:hover{
+  background:#15100b !important;
   border-color:#ff7a00;
   transform:translateY(-2px);
-  background:#15100b;
 }
 
 .home-upload-btn strong{
   display:block;
-  color:#ff7a00;
+  color:#ff7a00 !important;
   font-size:19px;
   margin-bottom:6px;
 }
 
 .home-upload-btn span{
   display:block;
-  color:#999;
+  color:#999999 !important;
   font-size:13px;
   line-height:1.5;
 }
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
 
 .container{
   width:88%;
@@ -184,25 +237,31 @@ nav a:hover{
 }
 
 .section{
-  background:#111;
+  background:#111111 !important;
+  color:#ffffff !important;
+
   border:1px solid #292929;
   border-radius:14px;
+
   padding:28px;
   margin-bottom:24px;
 }
 
 .section h2{
+  color:#ffffff !important;
   margin-bottom:8px;
   font-size:25px;
 }
 
 .section-description{
-  color:#999;
+  color:#999999 !important;
   margin-bottom:24px;
   line-height:1.6;
 }
 
-/* AUTH */
+/* =====================================================
+   AUTH
+===================================================== */
 
 .auth-section{
   display:none;
@@ -221,7 +280,7 @@ nav a:hover{
 .form-group label{
   display:block;
   margin-bottom:7px;
-  color:#ccc;
+  color:#cccccc !important;
   font-size:14px;
 }
 
@@ -229,13 +288,21 @@ input,
 textarea,
 select{
   width:100%;
+
   padding:13px;
-  background:#080808;
-  border:1px solid #333;
+
+  background:#080808 !important;
+  color:#ffffff !important;
+
+  border:1px solid #333333;
   border-radius:8px;
-  color:#fff;
+
   outline:none;
-  font-family:inherit;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#777777 !important;
 }
 
 input:focus,
@@ -251,12 +318,14 @@ textarea{
 
 .auth-message{
   margin-top:14px;
-  color:#ffb36b;
+  color:#ffb36b !important;
   font-size:14px;
   line-height:1.5;
 }
 
-/* STUDIO */
+/* =====================================================
+   STUDIO
+===================================================== */
 
 .studio{
   display:none;
@@ -274,22 +343,26 @@ textarea{
 }
 
 .credit-box{
-  background:#090909;
+  background:#090909 !important;
+  color:#cccccc !important;
+
   border:1px solid #2d2d2d;
   border-radius:10px;
+
   padding:18px;
   text-align:center;
-  color:#ccc;
 }
 
 .credit-box strong{
   display:block;
   font-size:28px;
-  color:#ff7a00;
+  color:#ff7a00 !important;
   margin-top:7px;
 }
 
-/* PRODUCTS */
+/* =====================================================
+   PRODUCTS
+===================================================== */
 
 .products{
   display:grid;
@@ -299,10 +372,14 @@ textarea{
 }
 
 .product-card{
-  background:#0a0a0a;
-  border:1px solid #333;
+  background:#0a0a0a !important;
+  color:#ffffff !important;
+
+  border:1px solid #333333;
   border-radius:12px;
+
   padding:23px;
+
   cursor:pointer;
   transition:.2s;
 }
@@ -314,38 +391,44 @@ textarea{
 
 .product-card.selected{
   border:2px solid #ff7a00;
-  background:#15100b;
+  background:#15100b !important;
 }
 
 .product-card h3{
-  color:#ff7a00;
+  color:#ff7a00 !important;
   margin-bottom:8px;
   font-size:20px;
 }
 
 .product-card .price{
+  color:#ffffff !important;
   font-size:30px;
   font-weight:800;
   margin:10px 0;
 }
 
 .product-card p{
-  color:#999;
+  color:#999999 !important;
   line-height:1.6;
   font-size:14px;
 }
 
-/* UPLOAD */
+/* =====================================================
+   UPLOAD
+===================================================== */
 
 .upload-box{
-  border:1px dashed #444;
+  background:#0b0b0b !important;
+
+  border:1px dashed #444444;
   border-radius:12px;
+
   padding:25px;
   margin-top:15px;
 }
 
 .file-help{
-  color:#777;
+  color:#777777 !important;
   font-size:12px;
   margin-top:7px;
   line-height:1.5;
@@ -362,7 +445,9 @@ textarea{
   margin-top:18px;
 }
 
-/* RESULTS */
+/* =====================================================
+   RESULTS
+===================================================== */
 
 .results{
   display:grid;
@@ -371,40 +456,54 @@ textarea{
 }
 
 .result-card{
-  background:#090909;
+  background:#090909 !important;
+  color:#ffffff !important;
+
   border:1px solid #292929;
   border-radius:10px;
+
   padding:18px;
 }
 
 .result-card h3{
   margin-bottom:7px;
-  color:#fff;
+  color:#ffffff !important;
 }
 
 .result-card p{
-  color:#999;
+  color:#999999 !important;
   font-size:14px;
   line-height:1.5;
 }
 
-/* FOOTER */
+/* =====================================================
+   FOOTER
+===================================================== */
 
 footer{
+  background:#090909 !important;
+  color:#777777 !important;
+
   text-align:center;
+
   padding:35px 20px;
-  border-top:1px solid #222;
-  color:#777;
+
+  border-top:1px solid #222222;
+
   font-size:13px;
 }
 
-/* HIDDEN */
+/* =====================================================
+   HIDDEN
+===================================================== */
 
 .hidden{
   display:none !important;
 }
 
-/* MOBILE */
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:750px){
 
@@ -455,7 +554,9 @@ footer{
 
 }
 
-</style></head><body><header>  <div class="logo">
+</style></head><body><!-- =====================================================
+     HEADER
+===================================================== --><header>  <div class="logo">
     NILE SONIQ AI
   </div>  <nav>
     <a href="#home">Home</a>
@@ -485,7 +586,9 @@ footer{
   Log Out
 </button>
 
-  </div></header><!-- HOMEPAGE --><section class="hero" id="home">  <h1>
+  </div></header><!-- =====================================================
+     HOMEPAGE
+===================================================== --><section class="hero" id="home">  <h1>
     Music from anywhere.<br>
     <span>Free to mix.</span>
   </h1>  <p>
@@ -506,7 +609,8 @@ footer{
   See What You Get
 </button>
 
-  </div>  <!-- NEW HOMEPAGE UPLOAD BUTTONS -->  <div class="home-upload"><button
+  </div>  <!-- HOMEPAGE UPLOAD OPTIONS -->  <div class="home-upload"><button
+  type="button"
   class="home-upload-btn"
   onclick="startUpload('audio')"
 >
@@ -523,6 +627,7 @@ footer{
 
 
 <button
+  type="button"
   class="home-upload-btn"
   onclick="startUpload('project')"
 >
@@ -532,12 +637,14 @@ footer{
   </strong>
 
   <span>
-    Upload your FL Studio, Logic, Ableton or other DAW project as a ZIP.
+    Upload your FL Studio, Logic Pro, Ableton or other DAW project as a ZIP.
   </span>
 
 </button>
 
-  </div></section><!-- SIGN UP --><section
+  </div></section><!-- =====================================================
+     SIGN UP
+===================================================== --><section
   class="section auth-section"
   id="signupSection"
 >  <h2>Create Your Account</h2>  <p class="section-description">
@@ -579,7 +686,9 @@ Cancel
   </button>  <div
     class="auth-message"
     id="signupMessage"
-  ></div></section><!-- SIGN IN --><section
+  ></div></section><!-- =====================================================
+     SIGN IN
+===================================================== --><section
   class="section auth-section"
   id="loginSection"
 >  <h2>Sign In</h2>  <p class="section-description">
@@ -621,10 +730,16 @@ Cancel
   </button>  <div
     class="auth-message"
     id="loginMessage"
-  ></div></section><!-- MAIN CONTENT --><main class="container"><!-- MIXER --><section
+  ></div></section><!-- =====================================================
+     MAIN CONTENT
+===================================================== --><main class="container"><!-- =====================================================
+     MIXER
+===================================================== --><section
   class="section studio"
   id="studio"
->  <h2>Project Mixer</h2>  <p class="section-description">
+>  <h2>
+    Project Mixer
+  </h2>  <p class="section-description">
     Choose what you want to mix.
   </p>  <!-- CREDITS -->  <div class="credits"><div class="credit-box">
 
@@ -748,6 +863,8 @@ Cancel
 </div>
 
 
+<!-- PROJECT REVISION -->
+
 <div
   class="form-group project-only"
   id="revisionGroup"
@@ -764,7 +881,7 @@ Cancel
 
 </div>
 
-  </div>  <!-- UPLOAD BUTTON --><button
+  </div>  <!-- UPLOAD --><button
 class="btn btn-orange"
 style="margin-top:18px"
 onclick="upload()"
@@ -773,7 +890,7 @@ onclick="upload()"
 
 Upload + Start Mix
 
-  </button>  <!-- PAYMENT BUTTONS -->  <div class="payment-buttons"><button
+  </button>  <!-- PAYMENTS -->  <div class="payment-buttons"><button
   class="btn btn-dark"
   onclick="buyMix('audio')"
 >
@@ -790,7 +907,9 @@ Upload + Start Mix
   </div>  <div
     class="auth-message"
     id="studioMessage"
-  ></div></section><!-- WHAT YOU GET --><section
+  ></div></section><!-- =====================================================
+     WHAT YOU GET
+===================================================== --><section
   class="section"
   id="results"
 >  <h2>
@@ -875,7 +994,9 @@ Upload + Start Mix
 
 </div>
 
-  </div></section></main><footer>© NILE SONIQ AI
+  </div></section></main><!-- =====================================================
+     FOOTER
+===================================================== --><footer>© NILE SONIQ AI
 
 </footer><script>
 
@@ -899,15 +1020,12 @@ let pendingUploadType = null;
 
 
 /* =====================================================
-   START HOMEPAGE UPLOAD
+   HOMEPAGE UPLOAD
 ===================================================== */
 
 function startUpload(type){
 
   pendingUploadType = type;
-
-
-  /* Already signed in */
 
   if(currentUser){
 
@@ -927,9 +1045,6 @@ function startUpload(type){
     return;
   }
 
-
-  /* Not signed in */
-
   showLogin();
 
 }
@@ -943,11 +1058,13 @@ function showSignup(){
 
   document
     .getElementById("loginSection")
-    .classList.remove("active");
+    .classList
+    .remove("active");
 
   document
     .getElementById("signupSection")
-    .classList.add("active");
+    .classList
+    .add("active");
 
   document
     .getElementById("signupSection")
@@ -966,11 +1083,13 @@ function showLogin(){
 
   document
     .getElementById("signupSection")
-    .classList.remove("active");
+    .classList
+    .remove("active");
 
   document
     .getElementById("loginSection")
-    .classList.add("active");
+    .classList
+    .add("active");
 
   document
     .getElementById("loginSection")
@@ -989,11 +1108,13 @@ function hideAuth(){
 
   document
     .getElementById("signupSection")
-    .classList.remove("active");
+    .classList
+    .remove("active");
 
   document
     .getElementById("loginSection")
-    .classList.remove("active");
+    .classList
+    .remove("active");
 
 }
 
@@ -1006,26 +1127,20 @@ function selectProduct(type){
 
   selectedProduct = type;
 
-
   const audioCard =
     document.getElementById("audioProduct");
-
 
   const projectCard =
     document.getElementById("projectProduct");
 
-
   const fileInput =
     document.getElementById("projectFile");
-
 
   const fileLabel =
     document.getElementById("fileLabel");
 
-
   const fileHelp =
     document.getElementById("fileHelp");
-
 
   const revisionGroup =
     document.getElementById("revisionGroup");
@@ -1071,7 +1186,6 @@ function selectProduct(type){
 
   }
 
-
   fileInput.value = "";
 
 }
@@ -1089,12 +1203,10 @@ async function signup(){
       .value
       .trim();
 
-
   const password =
     document
       .getElementById("signupPassword")
       .value;
-
 
   const message =
     document
@@ -1152,7 +1264,6 @@ async function signup(){
     message.textContent =
       "Account created successfully. You can now sign in.";
 
-
   }
 
   catch(error){
@@ -1177,12 +1288,10 @@ async function login(){
       .value
       .trim();
 
-
   const password =
     document
       .getElementById("loginPassword")
       .value;
-
 
   const message =
     document
@@ -1265,12 +1374,6 @@ async function login(){
     updateCredits(data);
 
 
-    /*
-      If the user came from one of the
-      homepage upload buttons, automatically
-      select that upload type.
-    */
-
     if(pendingUploadType){
 
       selectProduct(
@@ -1307,11 +1410,9 @@ async function login(){
 
 function logout(){
 
-  currentUser =
-    null;
+  currentUser = null;
 
-  pendingUploadType =
-    null;
+  pendingUploadType = null;
 
 
   document
@@ -1351,12 +1452,10 @@ function updateCredits(data){
     .textContent =
       data.freeCredits ?? 0;
 
-
   document
     .getElementById("audioCredits")
     .textContent =
       data.audioCredits ?? 0;
-
 
   document
     .getElementById("projectCredits")
@@ -1412,9 +1511,11 @@ async function upload(){
       .getElementById("studioMessage");
 
 
-  if(!songName ||
-     !artist ||
-     !file){
+  if(
+    !songName ||
+    !artist ||
+    !file
+  ){
 
     studioMessage.textContent =
       "Please enter the song name, artist and upload your file.";
