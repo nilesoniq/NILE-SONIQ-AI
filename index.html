@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NILE SONIQ AI — Project Mixer</title>
-
-<style>
+<title>NILE SONIQ AI — Project Mixer</title><style>
 :root{
   --black:#0a0a0a;
   --card:#161616;
@@ -49,9 +46,7 @@ header{
   font-size:20px
 }
 
-.logo span{
-  color:var(--orange)
-}
+.logo span{color:var(--orange)}
 
 nav a{
   color:var(--gray);
@@ -60,9 +55,7 @@ nav a{
   font-size:13px
 }
 
-nav a.active{
-  color:var(--white)
-}
+nav a.active{color:var(--white)}
 
 .hero{
   max-width:1300px;
@@ -74,9 +67,7 @@ nav a.active{
 }
 
 @media(max-width:900px){
-  .hero{
-    grid-template-columns:1fr
-  }
+  .hero{grid-template-columns:1fr}
 }
 
 .badge{
@@ -121,7 +112,7 @@ h1 b{
   margin:14px 0;
   line-height:1.6;
   font-size:15px;
-  max-width:500px
+  max-width:540px
 }
 
 .card{
@@ -176,13 +167,8 @@ input:focus{
   background:#1a1108
 }
 
-.drop b{
-  color:var(--white)
-}
-
-.drop small{
-  color:var(--gray)
-}
+.drop b{color:var(--white)}
+.drop small{color:var(--gray)}
 
 .btn{
   background:var(--orange);
@@ -197,9 +183,7 @@ input:focus{
   font-size:15px
 }
 
-.btn:hover{
-  background:var(--orange2)
-}
+.btn:hover{background:var(--orange2)}
 
 .btn:disabled{
   opacity:.5;
@@ -250,9 +234,7 @@ input:focus{
   color:var(--gray)
 }
 
-.outList b{
-  color:var(--white)
-}
+.outList b{color:var(--white)}
 
 .player{
   background:var(--card2);
@@ -261,11 +243,9 @@ input:focus{
   margin-top:12px
 }
 
-audio{
-  width:100%
-}
+audio{width:100%}
 
-/* AUTH */
+.hidden{display:none!important}
 
 .auth{
   max-width:500px;
@@ -295,12 +275,6 @@ audio{
   border-color:var(--orange)
 }
 
-.hidden{
-  display:none!important
-}
-
-/* ACCOUNT */
-
 .accountBar{
   max-width:1300px;
   margin:15px auto;
@@ -315,12 +289,11 @@ audio{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:15px
+  gap:15px;
+  flex-wrap:wrap
 }
 
-.accountName{
-  font-weight:800
-}
+.accountName{font-weight:800}
 
 .accountEmail{
   color:var(--gray);
@@ -361,18 +334,70 @@ audio{
   border-color:var(--orange)
 }
 
-.price{
-  color:var(--orange);
-  font-size:26px;
-  font-weight:900;
-  margin:8px 0
+.productGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:14px
 }
 
-.note{
-  font-size:11px;
+@media(max-width:650px){
+  .productGrid{grid-template-columns:1fr}
+}
+
+.product{
+  background:#111;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  cursor:pointer;
+  transition:.2s
+}
+
+.product:hover{
+  border-color:var(--orange)
+}
+
+.product.selected{
+  border-color:var(--orange);
+  box-shadow:0 0 0 1px var(--orange)
+}
+
+.productIcon{
+  font-size:28px;
+  margin-bottom:8px
+}
+
+.productTitle{
+  font-weight:900;
+  font-size:16px
+}
+
+.productPrice{
+  color:var(--orange);
+  font-size:20px;
+  font-weight:900;
+  margin-top:4px
+}
+
+.productText{
   color:var(--gray);
+  font-size:12px;
   line-height:1.5;
-  margin-top:8px
+  margin-top:6px
+}
+
+.priceBox{
+  background:#0f0f0f;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  margin-top:14px
+}
+
+.priceBox strong{
+  color:var(--orange);
+  font-size:20px
 }
 
 .status{
@@ -385,460 +410,389 @@ audio{
   color:var(--gray)
 }
 
-.status.success{
-  color:var(--green)
-}
-
-.status.error{
-  color:var(--red)
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <div class="logo">NILE <span>SONIQ</span></div>
-
-  <nav>
+.status.success{color:var(--green)}
+.status.error{color:var(--red)}
+</style></head><body><header>
+  <div class="logo">NILE <span>SONIQ</span></div>  <nav>
     <a href="https://nilesoniq.com">Main Site</a>
     <a class="active" href="#">AI Studio</a>
     <a href="https://nile-soniq-u5hh.vercel.app">Library</a>
   </nav>
-</header>
+</header><!-- ================= AUTH ================= --><section id="authSection" class="auth">  <div class="card"><div class="badge">
+  <i></i>
+  1 FREE MIX FOR NEW USERS
+</div>
+
+<h2 style="margin-top:15px">
+  NileSoniq AI Studio
+</h2>
+
+<p class="sub">
+  Create an account and get your first mix free.
+  After that, buy individual mixes whenever you need them.
+</p>
+
+<div class="authTabs">
+
+  <button id="loginTab"
+          class="active"
+          onclick="showLogin()">
+    Login
+  </button>
+
+  <button id="signupTab"
+          onclick="showSignup()">
+    Sign Up
+  </button>
+
+</div>
 
 
-<!-- ================= AUTH ================= -->
+<div id="loginBox">
 
-<section id="authSection" class="auth">
+  <label>Email</label>
+  <input id="loginEmail"
+         type="email"
+         placeholder="you@example.com">
 
-  <div class="card">
+  <label>Password</label>
+  <input id="loginPassword"
+         type="password"
+         placeholder="Password">
 
-    <div class="badge">
-      <i></i>
-      1 FREE MIX FOR NEW USERS
-    </div>
+  <button class="btn"
+          onclick="login()">
+    Login
+  </button>
 
-    <h2 style="margin-top:15px">NileSoniq AI Studio</h2>
-
-    <p class="sub">
-      Create an account and get your first project mix free.
-      After your free mix, one $10 payment gives you one additional project mix.
-    </p>
-
-    <div class="authTabs">
-      <button id="loginTab" class="active" onclick="showLogin()">
-        Login
-      </button>
-
-      <button id="signupTab" onclick="showSignup()">
-        Sign Up
-      </button>
-    </div>
+</div>
 
 
-    <!-- LOGIN -->
+<div id="signupBox" class="hidden">
 
-    <div id="loginBox">
+  <label>Your Name</label>
+  <input id="signupName"
+         placeholder="Your name">
 
-      <label>Email</label>
-      <input
-        type="email"
-        id="loginEmail"
-        placeholder="you@example.com"
-      >
+  <label>Email</label>
+  <input id="signupEmail"
+         type="email"
+         placeholder="you@example.com">
 
-      <label>Password</label>
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Password"
-      >
+  <label>Password</label>
+  <input id="signupPassword"
+         type="password"
+         placeholder="Create a password">
 
-      <button class="btn" onclick="login()">
-        Login
-      </button>
+  <button class="btn"
+          onclick="signup()">
+    Create Account + Get Free Mix
+  </button>
 
-    </div>
+</div>
 
+<div id="authLog" class="log"></div>
 
-    <!-- SIGN UP -->
-
-    <div id="signupBox" class="hidden">
-
-      <label>Your Name</label>
-      <input
-        type="text"
-        id="signupName"
-        placeholder="Your name"
-      >
-
-      <label>Email</label>
-      <input
-        type="email"
-        id="signupEmail"
-        placeholder="you@example.com"
-      >
-
-      <label>Password</label>
-      <input
-        type="password"
-        id="signupPassword"
-        placeholder="Create a password"
-      >
-
-      <button class="btn" onclick="signup()">
-        Create Account + Get Free Mix
-      </button>
-
-    </div>
-
-    <div id="authLog" class="log"></div>
-
+  </div></section><!-- ================= ACCOUNT ================= --><section id="accountSection"
+         class="accountBar hidden">  <div class="accountInner"><div>
+  <div id="accountName"
+       class="accountName">
+    User
   </div>
 
-</section>
+  <div id="accountEmail"
+       class="accountEmail">
+    user@email.com
+  </div>
+</div>
 
+<div class="credits">
 
-<!-- ================= ACCOUNT ================= -->
-
-<section id="accountSection" class="accountBar hidden">
-
-  <div class="accountInner">
-
-    <div>
-      <div class="accountName" id="accountName">
-        User
-      </div>
-
-      <div class="accountEmail" id="accountEmail">
-        user@email.com
-      </div>
-    </div>
-
-    <div class="credits">
-
-      <div class="credit">
-        Free Mix:
-        <strong id="freeCredit">1</strong>
-      </div>
-
-      <div class="credit">
-        Paid Mix:
-        <strong id="paidCredit">0</strong>
-      </div>
-
-    </div>
-
-    <button class="logout" onclick="logout()">
-      Logout
-    </button>
-
+  <div class="credit">
+    Free Mix:
+    <strong id="freeCredit">1</strong>
   </div>
 
-</section>
-
-
-<!-- ================= MAIN APP ================= -->
-
-<div id="appSection" class="hero hidden">
-
-  <div>
-
-    <div class="badge">
-      <i></i>
-      AI PROJECT MIXER
-    </div>
-
-    <h1>
-      Uganda's music,<br>
-      <b>free to mix.</b>
-    </h1>
-
-    <p class="sub">
-      Upload your FL Studio, Logic or Ableton project.
-      Your first project mix is free. After that, $10 gives
-      you one additional project mix.
-    </p>
-
-
-    <!-- UPLOAD -->
-
-    <div class="card" style="margin-top:20px">
-
-      <h3>Upload Project to Vault</h3>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-
-        <div>
-          <label>Song Name</label>
-          <input
-            id="songName"
-            placeholder="Ghetto Love"
-          >
-        </div>
-
-        <div>
-          <label>Artist</label>
-          <input
-            id="artist"
-            placeholder="Kato Music"
-          >
-        </div>
-
-      </div>
-
-
-      <label>
-        Project ZIP (.flp / .logicx / .als + stems)
-      </label>
-
-      <div
-        class="drop"
-        id="drop"
-        onclick="document.getElementById('file').click()"
-      >
-
-        <b>Drop project ZIP here</b><br>
-
-        <small>
-          Supports ZIP, FLP, LOGICX, ALS — up to 2GB
-        </small>
-
-        <input
-          type="file"
-          id="file"
-          hidden
-          accept=".zip,.flp,.logicx,.als,.rar,.wav,.flac"
-        >
-
-      </div>
-
-      <div id="fname" class="fileTag"></div>
-
-
-      <label>Revision Note</label>
-
-      <input
-        id="msg"
-        placeholder="v1: drums + bass"
-      >
-
-
-      <button
-        class="btn"
-        id="upBtn"
-        onclick="upload()"
-      >
-        Upload to Vault + Auto Mix →
-      </button>
-
-      <div id="upLog" class="log"></div>
-
-    </div>
-
-
-    <!-- REVISION -->
-
-    <div class="card" style="margin-top:14px">
-
-      <h3>Add New Revision / Collab</h3>
-
-      <label>Vault ID</label>
-
-      <input
-        id="vaultId"
-        placeholder="nilesoniq-ghetto-love-..."
-      >
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-
-        <div>
-
-          <label>New File</label>
-
-          <input
-            type="file"
-            id="file2"
-          >
-
-        </div>
-
-        <div>
-
-          <label>Artist</label>
-
-          <input
-            id="artist2"
-            placeholder="Maria - vocals"
-          >
-
-        </div>
-
-      </div>
-
-
-      <label>What's new?</label>
-
-      <input
-        id="msg2"
-        placeholder="Added hook vocals"
-      >
-
-
-      <button
-        class="btn-dark"
-        onclick="addVersion()"
-      >
-        Add Revision + Combine
-      </button>
-
-      <div id="vLog" class="log"></div>
-
-    </div>
-
+  <div class="credit">
+    Paid Audio:
+    <strong id="audioCredit">0</strong>
   </div>
 
+  <div class="credit">
+    Paid Project:
+    <strong id="projectCredit">0</strong>
+  </div>
 
-  <!-- ================= RIGHT SIDE ================= -->
+</div>
 
-  <div>
+<button class="logout"
+        onclick="logout()">
+  Logout
+</button>
 
-    <div class="card">
+  </div></section><!-- ================= MAIN ================= --><div id="appSection"
+     class="hero hidden">  <div><div class="badge">
+  <i></i>
+  NILE SONIQ AI MIXER
+</div>
 
-      <h3>What You Get Back</h3>
+<h1>
+  Uganda's music,<br>
+  <b>free to mix.</b>
+</h1>
 
-      <div class="outList" style="margin-top:10px">
+<p class="sub">
+  Upload a finished audio file or a complete DAW project.
+  Your first mix is free. After that, audio mixing costs
+  $5 and full project mixing costs $10.
+</p>
 
-        ✓ <b>Master.wav</b> — radio ready<br>
 
-        ✓ <b>Mix.wav</b> — clean mixdown<br>
+<!-- PRODUCT SELECTION -->
 
-        ✓ <b>NileMix Studio File</b> — editable project<br>
+<div class="card">
 
-        ✓ <b>Mixed Stems/</b> — polished stems<br>
+  <h3>Choose What You Want To Mix</h3>
 
-        ✓ <b>Original Project/</b> — untouched backup<br>
+  <div class="productGrid">
 
-        ✓ <b>History</b> — every version saved
+    <div id="audioProduct"
+         class="product selected"
+         onclick="selectProduct('audio')">
 
+      <div class="productIcon">🎵</div>
+
+      <div class="productTitle">
+        Audio Mix
       </div>
 
+      <div class="productPrice">
+        $5
+      </div>
 
-      <div class="player">
-
-        <label style="margin:0 0 6px">
-          Preview Master
-        </label>
-
-        <audio
-          controls
-          id="player"
-        ></audio>
-
-        <button
-          class="btn-dark"
-          id="dlBtn"
-          style="display:none"
-        >
-          ⬇ Download Full Vault ZIP
-        </button>
-
+      <div class="productText">
+        Upload WAV, FLAC or MP3.
+        Get a professionally processed mix
+        and master.
       </div>
 
     </div>
 
 
-    <!-- PAYMENT -->
+    <div id="projectProduct"
+         class="product"
+         onclick="selectProduct('project')">
 
-    <div class="card" style="margin-top:14px">
+      <div class="productIcon">🎚️</div>
 
-      <h3>Need Another Mix?</h3>
+      <div class="productTitle">
+        Full DAW Project
+      </div>
 
-      <div class="price">
+      <div class="productPrice">
         $10
       </div>
 
-      <p class="outList">
-        One payment gives you <b>one project mix</b>.
-      </p>
-
-      <button
-        class="btn"
-        id="payBtn"
-        onclick="buyMix()"
-      >
-        Buy 1 Project Mix — $10
-      </button>
-
-      <div class="note">
-        Your paid mix credit is added to your account only
-        after the payment provider confirms the payment.
-      </div>
-
-      <div
-        id="paymentStatus"
-        class="status"
-      >
-        Payment status will appear here.
+      <div class="productText">
+        Upload your FL Studio, Logic Pro,
+        Ableton or other complete project
+        as a ZIP.
       </div>
 
     </div>
 
+  </div>
 
-    <div
-      class="card"
-      style="margin-top:14px;background:#0f0f0f"
-    >
 
-      <h3>How It Works</h3>
+  <div class="priceBox">
 
-      <div
-        class="outList"
-        style="font-size:12px"
-      >
+    Selected:
 
-        <span style="color:var(--orange)">
-          1.
-        </span>
-        Create account → receive 1 free mix<br>
+    <strong id="selectedProduct">
+      Audio Mix — $5
+    </strong>
 
-        <span style="color:var(--orange)">
-          2.
-        </span>
-        Upload project → free credit is used<br>
+    <div id="productDescription"
+         class="productText">
+      Upload WAV, FLAC or MP3 audio.
+    </div>
 
-        <span style="color:var(--orange)">
-          3.
-        </span>
-        Free credit finished → pay $10<br>
+  </div>
 
-        <span style="color:var(--orange)">
-          4.
-        </span>
-        Payment confirmed → receive 1 paid mix credit<br>
+</div>
 
-        <span style="color:var(--orange)">
-          5.
-        </span>
-        Upload another project → paid credit is used<br>
 
-        <span style="color:var(--orange)">
-          6.
-        </span>
-        Vault keeps the project history
+<!-- UPLOAD -->
 
-      </div>
+<div class="card"
+     style="margin-top:14px">
+
+  <h3>Upload To Studio Vault</h3>
+
+  <div style="display:grid;
+              grid-template-columns:1fr 1fr;
+              gap:10px">
+
+    <div>
+
+      <label>Song Name</label>
+
+      <input id="songName"
+             placeholder="Ghetto Love">
 
     </div>
 
+    <div>
 
-    <button
-      class="btn-dark"
-      style="margin-top:14px"
-      onclick="window.open('https://nilesoniq.com')"
-    >
-      ← Back to nilesoniq.com
+      <label>Artist</label>
+
+      <input id="artist"
+             placeholder="Kato Music">
+
+    </div>
+
+  </div>
+
+
+  <label id="fileLabel">
+    Audio File
+  </label>
+
+  <div id="drop"
+       class="drop"
+       onclick="document
+         .getElementById('file')
+         .click()">
+
+    <b id="dropTitle">
+      Drop audio here
+    </b>
+
+    <br>
+
+    <small id="dropText">
+      WAV, FLAC or MP3
+    </small>
+
+    <input type="file"
+           id="file"
+           hidden
+           accept=".wav,.flac,.mp3">
+
+  </div>
+
+
+  <div id="fname"
+       class="fileTag">
+  </div>
+
+
+  <label>
+    Revision Note
+  </label>
+
+  <input id="msg"
+         placeholder="v1: first mix">
+
+
+  <button id="upBtn"
+          class="btn"
+          onclick="upload()">
+
+    Upload + Start Mix →
+
+  </button>
+
+
+  <div id="upLog"
+       class="log">
+  </div>
+
+</div>
+
+
+<!-- REVISION -->
+
+<div id="revisionCard"
+     class="card"
+     style="margin-top:14px">
+
+  <h3>
+    Add New Revision / Collab
+  </h3>
+
+  <label>
+    Vault ID
+  </label>
+
+  <input id="vaultId"
+         placeholder="nilesoniq-ghetto-love-...">
+
+  <label>
+    New File
+  </label>
+
+  <input type="file"
+         id="file2">
+
+  <label>
+    What's new?
+  </label>
+
+  <input id="msg2"
+         placeholder="Added hook vocals">
+
+  <button class="btn-dark"
+          onclick="addVersion()">
+
+    Add Revision + Combine
+
+  </button>
+
+  <div id="vLog"
+       class="log">
+  </div>
+
+</div>
+
+  </div>  <!-- ================= RIGHT COLUMN ================= -->  <div><div class="card">
+
+  <h3>
+    What You Get Back
+  </h3>
+
+  <div class="outList"
+       style="margin-top:10px">
+
+    ✓ <b>Master.wav</b> — final master<br>
+
+    ✓ <b>Mix.wav</b> — clean mixdown<br>
+
+    ✓ <b>Mixed Stems</b> — processed stems<br>
+
+    ✓ <b>Original Files</b> — untouched backup<br>
+
+    ✓ <b>Studio Vault</b> — project history<br>
+
+  </div>
+
+
+  <div class="player">
+
+    <label style="margin:0 0 6px">
+      Preview Master
+    </label>
+
+    <audio id="player"
+           controls>
+    </audio>
+
+    <button id="dlBtn"
+            class="btn-dark"
+            style="display:none">
+
+      ⬇ Download Full Vault
+
     </button>
 
   </div>
@@ -846,60 +800,183 @@ audio{
 </div>
 
 
-<script>
+<!-- PAYMENT -->
+
+<div class="card"
+     style="margin-top:14px">
+
+  <h3>
+    Buy Another Mix
+  </h3>
+
+  <div class="productGrid">
+
+    <div class="product"
+         onclick="buyMix('audio')">
+
+      <div class="productIcon">
+        🎵
+      </div>
+
+      <div class="productTitle">
+        1 Audio Mix
+      </div>
+
+      <div class="productPrice">
+        $5
+      </div>
+
+      <div class="productText">
+        One WAV, FLAC or MP3 mix.
+      </div>
+
+      <button class="btn">
+        Buy Audio Mix
+      </button>
+
+    </div>
+
+
+    <div class="product"
+         onclick="buyMix('project')">
+
+      <div class="productIcon">
+        🎚️
+      </div>
+
+      <div class="productTitle">
+        1 Project Mix
+      </div>
+
+      <div class="productPrice">
+        $10
+      </div>
+
+      <div class="productText">
+        One complete DAW project mix.
+      </div>
+
+      <button class="btn">
+        Buy Project Mix
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div id="paymentStatus"
+       class="status">
+
+    Payment status will appear here.
+
+  </div>
+
+</div>
+
+
+<div class="card"
+     style="margin-top:14px;
+            background:#0f0f0f">
+
+  <h3>
+    How It Works
+  </h3>
+
+  <div class="outList"
+       style="font-size:12px">
+
+    <span style="color:var(--orange)">
+      1.
+    </span>
+    Sign up → receive 1 free mix<br>
+
+    <span style="color:var(--orange)">
+      2.
+    </span>
+    Choose Audio or Project<br>
+
+    <span style="color:var(--orange)">
+      3.
+    </span>
+    Upload your files<br>
+
+    <span style="color:var(--orange)">
+      4.
+    </span>
+    First mix uses your free credit<br>
+
+    <span style="color:var(--orange)">
+      5.
+    </span>
+    Audio after that = $5<br>
+
+    <span style="color:var(--orange)">
+      6.
+    </span>
+    Full project after that = $10<br>
+
+    <span style="color:var(--orange)">
+      7.
+    </span>
+    Payment gives exactly one mix credit
+
+  </div>
+
+</div>
+
+
+<button class="btn-dark"
+        onclick="window.open(
+          'https://nilesoniq.com'
+        )">
+
+  ← Back to nilesoniq.com
+
+</button>
+
+  </div></div><script>
 
 /*
 ===========================================================
-NILE SONIQ AI MIXER
-FRONT-END CONFIGURATION
+NILE SONIQ AI STUDIO
 ===========================================================
 
-IMPORTANT:
+THE BACKEND HAS NOT BEEN CREATED YET.
 
-These are intentionally placeholders.
+We will replace this URL after creating the backend.
 
-We will create the real backend before this application
-goes live.
-
-NEVER put a PesaJet secret key, Supabase service-role key,
-Cloudflare secret, or other private credential here.
+DO NOT PUT PAYMENT SECRETS OR SERVICE-ROLE KEYS HERE.
 ===========================================================
 */
-
 
 const API_URL =
   "https://YOUR-NILEMIX-BACKEND.workers.dev";
 
 
-/*
-===========================================================
-LOCAL DEMO ACCOUNT STATE
-===========================================================
-
-This is ONLY temporary UI state.
-
-The real free/paid credits MUST eventually live in the
-backend/database so users cannot manipulate them.
-===========================================================
-*/
-
 let currentUser = null;
 
+let selectedProduct = "audio";
 
-/* ================= AUTH TABS ================= */
+
+/* ================= AUTH ================= */
 
 function showLogin(){
 
-  document.getElementById("loginBox")
+  document
+    .getElementById("loginBox")
     .classList.remove("hidden");
 
-  document.getElementById("signupBox")
+  document
+    .getElementById("signupBox")
     .classList.add("hidden");
 
-  document.getElementById("loginTab")
+  document
+    .getElementById("loginTab")
     .classList.add("active");
 
-  document.getElementById("signupTab")
+  document
+    .getElementById("signupTab")
     .classList.remove("active");
 
 }
@@ -907,17 +984,118 @@ function showLogin(){
 
 function showSignup(){
 
-  document.getElementById("signupBox")
+  document
+    .getElementById("signupBox")
     .classList.remove("hidden");
 
-  document.getElementById("loginBox")
+  document
+    .getElementById("loginBox")
     .classList.add("hidden");
 
-  document.getElementById("signupTab")
+  document
+    .getElementById("signupTab")
     .classList.add("active");
 
-  document.getElementById("loginTab")
+  document
+    .getElementById("loginTab")
     .classList.remove("active");
+
+}
+
+
+/* ================= PRODUCT ================= */
+
+function selectProduct(type){
+
+  selectedProduct = type;
+
+  const audio =
+    document.getElementById("audioProduct");
+
+  const project =
+    document.getElementById("projectProduct");
+
+  const label =
+    document.getElementById("fileLabel");
+
+  const title =
+    document.getElementById("dropTitle");
+
+  const text =
+    document.getElementById("dropText");
+
+  const selected =
+    document.getElementById("selectedProduct");
+
+  const description =
+    document.getElementById("productDescription");
+
+  const revision =
+    document.getElementById("revisionCard");
+
+
+  audio.classList.remove("selected");
+  project.classList.remove("selected");
+
+
+  if(type === "audio"){
+
+    audio.classList.add("selected");
+
+    selected.textContent =
+      "Audio Mix — $5";
+
+    description.textContent =
+      "Upload WAV, FLAC or MP3 audio.";
+
+    label.textContent =
+      "Audio File";
+
+    title.textContent =
+      "Drop audio here";
+
+    text.textContent =
+      "WAV, FLAC or MP3";
+
+    document
+      .getElementById("file")
+      .accept =
+      ".wav,.flac,.mp3";
+
+    revision.classList.add("hidden");
+
+  }else{
+
+    project.classList.add("selected");
+
+    selected.textContent =
+      "Full DAW Project — $10";
+
+    description.textContent =
+      "Upload a complete FL Studio, Logic Pro, Ableton or similar project as a ZIP.";
+
+    label.textContent =
+      "Complete DAW Project";
+
+    title.textContent =
+      "Drop project ZIP here";
+
+    text.textContent =
+      "FL Studio, Logic Pro, Ableton project + audio files";
+
+    document
+      .getElementById("file")
+      .accept =
+      ".zip";
+
+    revision.classList.remove("hidden");
+
+  }
+
+
+  document.getElementById("file").value = "";
+
+  document.getElementById("fname").textContent = "";
 
 }
 
@@ -927,18 +1105,28 @@ function showSignup(){
 async function signup(){
 
   const name =
-    document.getElementById("signupName").value.trim();
+    document
+      .getElementById("signupName")
+      .value
+      .trim();
 
   const email =
-    document.getElementById("signupEmail").value.trim();
+    document
+      .getElementById("signupEmail")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("signupPassword").value;
+    document
+      .getElementById("signupPassword")
+      .value;
 
   const log =
     document.getElementById("authLog");
 
+
   log.style.display = "block";
+
 
   if(!name || !email || !password){
 
@@ -946,6 +1134,7 @@ async function signup(){
       "❌ Please fill in all fields.";
 
     return;
+
   }
 
 
@@ -955,40 +1144,30 @@ async function signup(){
       "❌ Password must be at least 6 characters.";
 
     return;
+
   }
 
-
-  /*
-  ---------------------------------------------------------
-  REAL BACKEND CALL WILL GO HERE.
-  ---------------------------------------------------------
-
-  The server will:
-
-  1. Create the user.
-  2. Give the user exactly 1 free mix.
-  3. Store the credit in the database.
-  ---------------------------------------------------------
-  */
 
   try{
 
     const response =
-      await fetch(`${API_URL}/auth/signup`,{
+      await fetch(
+        `${API_URL}/auth/signup`,
+        {
+          method:"POST",
 
-        method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
 
-        headers:{
-          "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify({
-          name,
-          email,
-          password
-        })
-
-      });
+          body:JSON.stringify({
+            name,
+            email,
+            password
+          })
+        }
+      );
 
 
     const data =
@@ -998,14 +1177,17 @@ async function signup(){
     if(!response.ok){
 
       throw new Error(
-        data.message || "Signup failed."
+        data.message ||
+        "Signup failed."
       );
 
     }
 
 
     log.textContent =
-      "✅ Account created. You received 1 free project mix.";
+      "✅ Account created. Your first mix is free.";
+
+    showLogin();
 
   }catch(error){
 
@@ -1022,13 +1204,19 @@ async function signup(){
 async function login(){
 
   const email =
-    document.getElementById("loginEmail").value.trim();
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("loginPassword").value;
+    document
+      .getElementById("loginPassword")
+      .value;
 
   const log =
     document.getElementById("authLog");
+
 
   log.style.display = "block";
 
@@ -1039,26 +1227,29 @@ async function login(){
       "❌ Enter your email and password.";
 
     return;
+
   }
 
 
   try{
 
     const response =
-      await fetch(`${API_URL}/auth/login`,{
+      await fetch(
+        `${API_URL}/auth/login`,
+        {
+          method:"POST",
 
-        method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
 
-        headers:{
-          "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify({
-          email,
-          password
-        })
-
-      });
+          body:JSON.stringify({
+            email,
+            password
+          })
+        }
+      );
 
 
     const data =
@@ -1068,7 +1259,8 @@ async function login(){
     if(!response.ok){
 
       throw new Error(
-        data.message || "Login failed."
+        data.message ||
+        "Login failed."
       );
 
     }
@@ -1108,13 +1300,15 @@ function openStudio(data){
   document
     .getElementById("accountName")
     .textContent =
-      data.user.name || "NileSoniq User";
+      data.user.name ||
+      "NileSoniq User";
 
 
   document
     .getElementById("accountEmail")
     .textContent =
-      data.user.email || "";
+      data.user.email ||
+      "";
 
 
   updateCredits(data);
@@ -1126,21 +1320,20 @@ function openStudio(data){
 
 function updateCredits(data){
 
-  const free =
-    Number(data.freeMixes || 0);
-
-  const paid =
-    Number(data.paidMixes || 0);
-
-
   document
     .getElementById("freeCredit")
-    .textContent = free;
-
+    .textContent =
+      Number(data.freeMixes || 0);
 
   document
-    .getElementById("paidCredit")
-    .textContent = paid;
+    .getElementById("audioCredit")
+    .textContent =
+      Number(data.audioMixes || 0);
+
+  document
+    .getElementById("projectCredit")
+    .textContent =
+      Number(data.projectMixes || 0);
 
 }
 
@@ -1166,7 +1359,7 @@ function logout(){
 }
 
 
-/* ================= FILE UPLOAD ================= */
+/* ================= FILE ================= */
 
 const drop =
   document.getElementById("drop");
@@ -1236,7 +1429,7 @@ function showFile(){
 }
 
 
-/* ================= UPLOAD + MIX ================= */
+/* ================= UPLOAD ================= */
 
 async function upload(){
 
@@ -1245,7 +1438,11 @@ async function upload(){
 
   if(!f){
 
-    alert("Select your project first.");
+    alert(
+      selectedProduct === "audio"
+      ? "Select an audio file first."
+      : "Select your project ZIP first."
+    );
 
     return;
 
@@ -1272,33 +1469,14 @@ async function upload(){
 
   try{
 
-    /*
-    =======================================================
-    IMPORTANT
-
-    The backend must check the credit.
-
-    It must NOT trust a value coming from this HTML.
-
-    Server logic:
-
-    IF free_mix = 1:
-       consume free_mix
-       start mix
-
-    ELSE IF paid_mix > 0:
-       consume paid_mix
-       start mix
-
-    ELSE:
-       return PAYMENT_REQUIRED
-    =======================================================
-    */
-
-
     const fd =
       new FormData();
 
+
+    fd.append(
+      "productType",
+      selectedProduct
+    );
 
     fd.append(
       "songName",
@@ -1306,20 +1484,17 @@ async function upload(){
       "untitled"
     );
 
-
     fd.append(
       "artist",
       document.getElementById("artist").value ||
       "unknown"
     );
 
-
     fd.append(
       "message",
       document.getElementById("msg").value ||
       "v1"
     );
-
 
     fd.append(
       "project",
@@ -1344,13 +1519,12 @@ async function upload(){
     if(response.status === 402){
 
       log.textContent =
-        "❌ Your free mix has been used.\n\n" +
-        "You need to buy one $10 mix credit.";
+        selectedProduct === "audio"
 
-      document
-        .getElementById("paymentStatus")
-        .textContent =
-        "Payment required — buy 1 mix for $10.";
+        ? "❌ No Audio Mix credit available.\n\nAudio Mix: $5"
+
+        : "❌ No Project Mix credit available.\n\nProject Mix: $10";
+
 
       return;
 
@@ -1368,8 +1542,8 @@ async function upload(){
 
 
     log.textContent =
-      "✅ Project uploaded.\n" +
-      "→ Mixing started...\n\n" +
+      "✅ Upload successful.\n" +
+      "→ Mixing job created.\n\n" +
       JSON.stringify(
         data,
         null,
@@ -1397,20 +1571,16 @@ async function upload(){
     }
 
 
-    /*
-    Update account credits using the values returned
-    by the server.
-    */
+    updateCredits({
 
-    if(data.freeMixes !== undefined){
+      freeMixes:data.freeMixes,
 
-      updateCredits({
-        user:currentUser,
-        freeMixes:data.freeMixes,
-        paidMixes:data.paidMixes
-      });
+      audioMixes:data.audioMixes,
 
-    }
+      projectMixes:data.projectMixes
+
+    });
+
 
   }catch(error){
 
@@ -1422,59 +1592,37 @@ async function upload(){
     btn.disabled = false;
 
     btn.textContent =
-      "Upload to Vault + Auto Mix →";
+      "Upload + Start Mix →";
 
   }
 
 }
 
 
-/* ================= BUY ONE MIX ================= */
+/* ================= BUY MIX ================= */
 
-async function buyMix(){
-
-  const button =
-    document.getElementById("payBtn");
+async function buyMix(type){
 
   const status =
-    document.getElementById("paymentStatus");
+    document.getElementById(
+      "paymentStatus"
+    );
 
 
-  button.disabled = true;
-
-  button.textContent =
-    "Opening Payment...";
+  const price =
+    type === "audio"
+    ? 5
+    : 10;
 
 
   status.className =
     "status";
 
   status.textContent =
-    "Creating secure payment request...";
+    `Creating secure $${price} payment...`;
 
 
   try{
-
-    /*
-    =======================================================
-    REAL PAYMENT FLOW
-
-    The backend will create a PesaJet/payment transaction.
-
-    The browser NEVER receives the secret payment key.
-
-    After successful payment:
-
-        Payment Provider
-              ↓
-        Backend verifies payment
-              ↓
-        paid_mix_credits + 1
-              ↓
-        User receives exactly ONE mix
-    =======================================================
-    */
-
 
     const response =
       await fetch(
@@ -1489,12 +1637,11 @@ async function buyMix(){
 
           body:JSON.stringify({
 
-            amount:10,
+            productType:type,
 
-            currency:"USD",
+            amount:price,
 
-            product:
-              "NileSoniq AI - 1 Project Mix"
+            currency:"USD"
 
           })
 
@@ -1516,10 +1663,6 @@ async function buyMix(){
     }
 
 
-    /*
-    Payment provider checkout URL.
-    */
-
     if(data.checkoutUrl){
 
       window.location.href =
@@ -1540,19 +1683,12 @@ async function buyMix(){
     status.textContent =
       "❌ " + error.message;
 
-  }finally{
-
-    button.disabled = false;
-
-    button.textContent =
-      "Buy 1 Project Mix — $10";
-
   }
 
 }
 
 
-/* ================= ADD VERSION ================= */
+/* ================= REVISION ================= */
 
 async function addVersion(){
 
@@ -1587,7 +1723,7 @@ async function addVersion(){
     "block";
 
   log.textContent =
-    "→ Checking Vault...\n";
+    "→ Sending revision...\n";
 
 
   try{
@@ -1601,24 +1737,13 @@ async function addVersion(){
       vault
     );
 
-
-    fd.append(
-      "artist",
-      document
-        .getElementById("artist2")
-        .value ||
-      "collab"
-    );
-
-
     fd.append(
       "message",
       document
         .getElementById("msg2")
         .value ||
-      "v2"
+      "New revision"
     );
-
 
     fd.append(
       "project",
@@ -1667,7 +1792,8 @@ async function addVersion(){
 
 }
 
-</script>
-
-</body>
+</script></body>
 </html>
+```This is the "index.html" direction we should keep. It doesn't claim to mix anything yet—the actual mixing, credit enforcement, user accounts, and payment verification will be done securely in the backend.
+
+Next: we should create the backend/database first, because that's what will make the "$5 audio / $10 project / 1 free mix" system real. I recommend we build that next before touching the mixer engine.
