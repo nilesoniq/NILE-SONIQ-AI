@@ -3,164 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NileSoniq AI — Projects, Not Audios</title>
-<link rel="icon" href="https://nilesoniq.github.io/favicon.ico">
+<title>NILE SONIQ AI — Project Mixer</title>
 <style>
-:root{--lime:#a3ff12;--bg:#080808;--card:#141414;--border:#222}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui}
-body{background:var(--bg);color:#fff}
-header{padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
-.logo{font-weight:900;font-size:22px}.logo span{color:var(--lime)}
-.nav a{color:#888;margin-left:20px;text-decoration:none;font-size:14px}.nav a.active{color:#fff}
-.hero{max-width:1200px;margin:40px auto;padding:0 20px;display:grid;grid-template-columns:1.2fr.8fr;gap:30px}
-h1{font-size:48px;line-height:.95;letter-spacing:-2px} h1 span{color:var(--lime)}
-.hero p{color:#888;margin:15px 0;line-height:1.6}
-.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px}
-label{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;display:block;margin:14px 0 6px}
-input,select{width:100%;background:#0f0f0f;border:1px solid #2a2a2a;color:#fff;padding:13px;border-radius:12px}
-button{background:var(--lime);color:#000;border:0;padding:14px;border-radius:12px;font-weight:800;cursor:pointer;width:100%;margin-top:16px}
-button.sec{background:#222;color:#fff}
-.drop{border:2px dashed #333;border-radius:16px;padding:30px;text-align:center;color:#666;margin-top:10px;cursor:pointer}
-.drop.dragover{border-color:var(--lime);color:var(--lime);background:#a3ff1211}
-.log{background:#000;border-radius:12px;padding:12px;font-family:monospace;font-size:11px;color:var(--lime);margin-top:12px;max-height:180px;overflow:auto;display:none}
-.grid{max-width:1200px;margin:20px auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
-.project-card{padding:14px;border:1px solid #222;border-radius:14px;background:#111}
-.badge{background:#222;color:#aaa;padding:4px 8px;border-radius:20px;font-size:10px}
-audio{width:100%;margin-top:10px}
-@media(max-width:900px){.hero,.grid{grid-template-columns:1fr}}
+:root{
+  --black:#000000;
+  --near:#141414;
+  --card:#0f0f0f;
+  --border:#343434;
+  --border2:#414141cc;
+  --lime:#a3ff12;
+  --lime2:#faff69;
+  --white:#ffffff;
+  --silver:#a0a0a0;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,sans-serif}
+body{background:var(--black);color:var(--white);min-height:100vh}
+header{border-bottom:1px solid var(--border);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;max-width:1300px;margin:0 auto}
+.logo{font-weight:900;letter-spacing:-1px;font-size:20px}.logo b{color:var(--lime)}
+header nav a{color:var(--silver);text-decoration:none;margin-left:24px;font-size:13px;text-transform:uppercase;letter-spacing:1.4px}
+header nav a:hover,header nav a.active{color:var(--lime2)}
+.wrap{max-width:1300px;margin:0 auto;padding:24px;display:grid;grid-template-columns:1.1fr.9fr;gap:24px}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+h1{font-size:56px;line-height:.9;letter-spacing:-3px;font-weight:900;text-transform:uppercase}
+h1 i{color:var(--lime2);font-style:normal}
+.sub{color:var(--silver);margin:14px 0 0;line-height:1.6;max-width:520px}
+.card{background:var(--near);border:1px solid var(--border2);border-radius:16px;padding:20px}
+.card h3{font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--silver);margin-bottom:12px}
+label{font-size:11px;color:var(--silver);text-transform:uppercase;letter-spacing:1.2px;display:block;margin:14px 0 6px}
+input{background:var(--black);border:1px solid var(--border);color:#fff;padding:12px 14px;border-radius:10px;width:100%;outline:none}
+input:focus{border-color:var(--lime)}
+.drop{border:1px dashed var(--border2);background:#0a0a0a;border-radius:14px;padding:32px;text-align:center;cursor:pointer;transition:.2s}
+.drop:hover{border-color:var(--lime);background:#a3ff120d}
+.drop b{color:var(--white)}.drop span{color:var(--silver);font-size:13px}
+.btn{background:var(--lime2);color:#000;border:0;padding:14px;border-radius:12px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;width:100%;margin-top:16px;cursor:pointer}
+.btn:hover{background:var(--lime)}
+.btn-dark{background:var(--near);color:var(--white);border:1px solid var(--border)}
+.btn-dark:hover{background:#1a1a1a;border-color:var(--lime2);color:var(--lime2)}
+.log{background:var(--black);border:1px solid var(--border);border-radius:10px;padding:10px;font-family:monospace;font-size:11px;color:var(--lime2);margin-top:12px;display:none;max-height:180px;overflow:auto;white-space:pre-wrap}
+.fileTag{color:var(--lime2);font-size:12px;margin-top:8px}
+.outputList{font-size:13px;line-height:2;color:var(--silver)}.outputList b{color:var(--white)}
+audio{width:100%;margin-top:12px;filter:invert(1)}
+.grid{max-width:1300px;margin:0 auto;padding:0 24px 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr} h1{font-size:38px}}
+.pill{background:#161600;border:1px solid #4f5100;color:var(--lime2);padding:4px 10px;border-radius:20px;font-size:10px;text-transform:uppercase;letter-spacing:1px}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="logo">NILE<span>SONIQ</span> AI</div>
-  <div class="nav">
-    <a href="https://nile-soniq-u5hh.vercel.app" target="_blank">Main App</a>
-    <a class="active" href="#">Project Mixer</a>
+  <div class="logo">NILE <b>SONIQ</b></div>
+  <nav>
+    <a href="https://nile-soniq-u5hh.vercel.app">Main App</a>
+    <a class="active" href="#">AI Mixer</a>
     <a href="https://github.com/nilesoniq/NILE-SONIQ-AI">GitHub</a>
-  </div>
+  </nav>
 </header>
 
-<div class="hero">
+<div class="wrap">
   <div>
-    <h1>MIX <span>PROJECTS</span><br>NOT JUST<br>AUDIOS</h1>
-    <p>Upload your FL Studio, Logic Pro, Ableton project. We auto-mix & master and give you back <b>full editable project + final WAV</b>. GitHub version control for every song.</p>
+    <h1>MIX <i>PROJECTS</i><br>NOT AUDIOS</h1>
+    <p class="sub">The GitHub for music. Upload FL / Logic / Ableton project ZIP — we version it, auto-mix stems, and return <b style="color:#fff">full editable project + Master.wav</b>. Built in Kampala for UG artists.</p>
 
-    <div class="card" style="margin-top:20px">
-      <h3>Upload Project</h3>
+    <div class="card" style="margin-top:22px">
+      <h3>Upload Project → GitHub Repo</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div><label>Song Name</label><input id="songName" placeholder="Ghetto Love"></div>
         <div><label>Artist</label><input id="artist" placeholder="Kato Music"></div>
       </div>
-      <label>Project File (ZIP with FLP/Logic + stems)</label>
+      <label>Project ZIP</label>
       <div class="drop" id="drop" onclick="document.getElementById('file').click()">
-        <div id="dropText">Drop ZIP here or click to browse<br><small>Supports.zip,.flp,.logicx,.als</small></div>
-        <input type="file" id="file" hidden accept=".zip,.flp,.logicx,.als,.rar,.flac,.wav">
+        <b>Drop project ZIP here</b><br><span>.zip /.flp /.logicx /.als — max 2GB via R2</span>
+        <input type="file" id="file" hidden accept=".zip,.flp,.logicx,.als,.rar,.wav,.flac">
       </div>
-      <div id="fileName" style="margin-top:10px;color:var(--lime);font-size:13px"></div>
-      <label>Version Note</label><input id="msg" placeholder="v1: drums + bassline">
-      <button id="upBtn" onclick="uploadProject()">Upload to GitHub & Mix →</button>
+      <div id="fname" class="fileTag"></div>
+      <label>Version Message</label><input id="msg" placeholder="v1: drums + bass">
+      <button class="btn" id="upBtn" onclick="upload()">Upload to GitHub + Mix</button>
       <div id="upLog" class="log"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Collab — Add Version</h3>
+      <label>Repo Name</label><input id="repoName" placeholder="nilesoniq-ghetto-love-...">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><label>File</label><input type="file" id="file2"></div>
+        <div><label>Artist</label><input id="artist2" placeholder="Maria"></div>
+      </div>
+      <label>Message</label><input id="msg2" placeholder="Added hook vocals">
+      <button class="btn-dark" onclick="addVersion()">Add v2 + Auto-Merge</button>
+      <div id="vLog" class="log"></div>
     </div>
   </div>
 
   <div>
     <div class="card">
-      <h3>What You Get Back</h3>
-      <div style="font-size:13px;color:#888;line-height:1.7;margin-top:10px">
-        ✓ <b style="color:#fff">Master.wav</b> (-14 LUFS, radio-ready)<br>
-        ✓ <b style="color:#fff">Mix.wav</b> (unmastered)<br>
-        ✓ <b style="color:#fff">NileMix.dawproject</b> — opens in FL 24+, Logic 11, Ableton 12, Studio One (editable mixer)<br>
-        ✓ <b style="color:#fff">Mixed Stems/</b> — each stem after EQ/comp<br>
-        ✓ <b style="color:#fff">Original/</b> — your untouched project<br>
-        ✓ <b style="color:#fff">versions.json</b> — Git history
+      <h3>What You Get Back <span class="pill" style="float:right">Full Project + Audio</span></h3>
+      <div class="outputList" style="margin-top:12px">
+        ✓ <b>Master.wav</b> — -14 LUFS loudness, ready for NileSoniq<br>
+        ✓ <b>Mix.wav</b> — clean mix<br>
+        ✓ <b>NileMix.dawproject</b> — editable in FL 24+, Logic 11, Ableton 12<br>
+        ✓ <b>Mixed Stems/</b> — each stem with EQ/comp applied<br>
+        ✓ <b>Original/</b> — untouched<br>
+        ✓ <b>versions.json</b> — Git-like history
       </div>
-      <div style="margin-top:15px;padding:12px;background:#000;border-radius:12px">
-        <label style="margin:0 0 6px">Preview Master</label>
-        <audio controls id="audioPlayer"></audio>
-        <button class="sec" id="dlBtn" style="display:none">Download Full Project ZIP</button>
-      </div>
+      <audio controls id="player" style="margin-top:16px"></audio>
+      <button class="btn-dark" id="dlBtn" style="display:none;margin-top:10px">⬇ Download Full ZIP (Project + Audio)</button>
     </div>
 
-    <div class="card" style="margin-top:20px">
-      <h3>Add Version / Collab</h3>
-      <label>Repo Name (from previous upload)</label><input id="repoName" placeholder="nilesoniq-ghetto-love-...">
-      <label>Collab File</label><input type="file" id="file2">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div><label>Artist</label><input id="artist2" placeholder="Maria"></div>
-        <div><label>Note</label><input id="msg2" placeholder="Added vocals"></div>
+    <div class="card" style="margin-top:16px;background:#000">
+      <h3>How GitHub Logic Works</h3>
+      <div class="outputList" style="font-size:12px">
+        Song = Private GitHub Repo<br>
+        <span style="color:var(--lime2)">v1</span> = Initial upload (producer)<br>
+        <span style="color:var(--lime2)">v2</span> = Pull Request (vocalist adds)<br>
+        Merge = Auto-mix triggers<br>
+        Every version saved with LFS
       </div>
-      <button class="sec" onclick="addVersion()">Add v2 + Auto-Merge</button>
-      <div id="vLog" class="log"></div>
     </div>
   </div>
 </div>
 
-<div class="grid" id="projectsGrid"></div>
+<div class="grid" id="grid"></div>
 
 <script>
-// CONFIG - CHANGE THESE
-const WORKER_URL = "https://nilemix-github.YOUR_SUBDOMAIN.workers.dev"; // <-- put your worker URL
-const GITHUB_USER = "nilesoniq";
+const WORKER_URL = "https://nilemix-github.YOUR_SUBDOMAIN.workers.dev";
+const drop=document.getElementById('drop'), fi=document.getElementById('file');
+drop.addEventListener('dragover',e=>{e.preventDefault();drop.style.borderColor='#faff69'});
+drop.addEventListener('dragleave',()=>drop.style.borderColor='');
+drop.addEventListener('drop',e=>{e.preventDefault();fi.files=e.dataTransfer.files;show()});
+fi.addEventListener('change',show);
+function show(){const f=fi.files[0];if(f)document.getElementById('fname').textContent=`📦 ${f.name} — ${(f.size/1024/1024).toFixed(2)} MB`; }
 
-const drop = document.getElementById('drop');
-const fileInput = document.getElementById('file');
-
-drop.addEventListener('dragover', e=>{e.preventDefault(); drop.classList.add('dragover')});
-drop.addEventListener('dragleave', ()=>drop.classList.remove('dragover'));
-drop.addEventListener('drop', e=>{e.preventDefault(); drop.classList.remove('dragover'); fileInput.files=e.dataTransfer.files; showFile()});
-fileInput.addEventListener('change', showFile);
-
-function showFile(){
-  const f=fileInput.files[0];
-  if(f) document.getElementById('fileName').textContent=`📦 ${f.name} — ${(f.size/1024/1024).toFixed(2)} MB`;
-}
-
-async function uploadProject(){
-  const f=fileInput.files[0];
-  if(!f) return alert("Select ZIP");
+async function upload(){
+  const f=fi.files[0]; if(!f) return alert("Select ZIP");
   const btn=document.getElementById('upBtn'), log=document.getElementById('upLog');
-  btn.disabled=true; btn.textContent="Creating GitHub repo..."; log.style.display="block"; log.textContent="Uploading...\n";
-
+  btn.disabled=true; btn.textContent="Creating repo..."; log.style.display="block"; log.textContent="→ Creating private repo...\n";
   const fd=new FormData();
   fd.append("songName",document.getElementById('songName').value||"untitled");
   fd.append("artist",document.getElementById('artist').value||"unknown");
   fd.append("message",document.getElementById('msg').value||"v1");
   fd.append("project",f);
-
   try{
     const r=await fetch(`${WORKER_URL}/upload`,{method:"POST",body:fd});
-    const d=await r.json();
-    log.textContent+=JSON.stringify(d,null,2);
-    if(d.repoName){
-      document.getElementById('repoName').value=d.repoName;
-      localStorage.setItem('lastRepo',d.repoName);
-      log.textContent+=`\n\n✅ Repo: ${d.repo}\nYou can now add versions.`;
-      // Try load preview if master exists later
-    }
-  }catch(e){log.textContent+="\n❌ "+e.message+"\nCheck WORKER_URL in code."}
-  btn.disabled=false; btn.textContent="Upload to GitHub & Mix →";
+    const d=await r.json(); log.textContent+=JSON.stringify(d,null,2);
+    if(d.repoName){document.getElementById('repoName').value=d.repoName; log.textContent+=`\n\n✅ ${d.repo}`;}
+  }catch(e){log.textContent+="\n❌ "+e.message+" — check WORKER_URL"}
+  btn.disabled=false; btn.textContent="Upload to GitHub + Mix";
 }
-
 async function addVersion(){
-  const f=document.getElementById('file2').files[0];
-  const repo=document.getElementById('repoName').value;
+  const f=document.getElementById('file2').files[0], repo=document.getElementById('repoName').value;
   if(!f||!repo) return alert("Need repo + file");
   const log=document.getElementById('vLog'); log.style.display="block"; log.textContent="Merging...\n";
-  const fd=new FormData();
-  fd.append("repoName",repo); fd.append("artist",document.getElementById('artist2').value||"collab");
-  fd.append("message",document.getElementById('msg2').value||"v2"); fd.append("project",f);
-  try{
-    const r=await fetch(`${WORKER_URL}/add-version`,{method:"POST",body:fd});
-    const d=await r.json(); log.textContent+=JSON.stringify(d,null,2);
-  }catch(e){log.textContent+=e.message}
+  const fd=new FormData(); fd.append("repoName",repo); fd.append("artist",document.getElementById('artist2').value||"collab"); fd.append("message",document.getElementById('msg2').value||"v2"); fd.append("project",f);
+  try{const r=await fetch(`${WORKER_URL}/add-version`,{method:"POST",body:fd}); const d=await r.json(); log.textContent+=JSON.stringify(d,null,2);}catch(e){log.textContent+=e.message}
 }
-
-// Auto-load last repo
-window.addEventListener('load',()=>{
-  const last=localStorage.getItem('lastRepo');
-  if(last) document.getElementById('repoName').value=last;
-});
 </script>
 </body>
 </html>
