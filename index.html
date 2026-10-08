@@ -1,1799 +1,1124 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NILE SONIQ AI — Project Mixer</title><style>
-:root{
-  --black:#0a0a0a;
-  --card:#161616;
-  --card2:#1e1e1e;
-  --border:#2a2a2a;
-  --orange:#ff6b00;
-  --orange2:#ff8533;
-  --badge-bg:#2a1a0a;
-  --badge-text:#ff6b00;
-  --white:#fff;
-  --gray:#9a9a9a;
-  --green:#25d366;
-  --red:#ff4545;
-}
+<title>NILE SONIQ AI — Project Mixer</title>
 
+<style>
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:Inter,system-ui,sans-serif
 }
 
 body{
-  background:var(--black);
-  color:var(--white);
-  min-height:100vh
+  font-family:Arial,Helvetica,sans-serif;
+  background:#090909;
+  color:#fff;
+  min-height:100vh;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
 header{
-  padding:18px 20px;
+  background:#111;
+  border-bottom:1px solid #292929;
+  padding:18px 6%;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  max-width:1300px;
-  margin:auto
+  justify-content:space-between;
+  gap:20px;
 }
 
 .logo{
-  font-weight:900;
-  letter-spacing:-1px;
-  font-size:20px
+  font-size:22px;
+  font-weight:800;
+  color:#ff7a00;
 }
 
-.logo span{color:var(--orange)}
+nav{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
 
 nav a{
-  color:var(--gray);
-  text-decoration:none;
-  margin-left:20px;
-  font-size:13px
+  color:#ddd;
+  font-size:14px;
 }
 
-nav a.active{color:var(--white)}
-
-.hero{
-  max-width:1300px;
-  margin:20px auto;
-  padding:0 20px;
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  gap:22px
+nav a:hover{
+  color:#ff7a00;
 }
 
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr}
+.auth-buttons{
+  display:flex;
+  gap:10px;
 }
 
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  background:var(--badge-bg);
-  border:1px solid #4a2a0a;
-  color:var(--badge-text);
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:11px;
+button{
+  border:0;
+  cursor:pointer;
   font-weight:700;
-  letter-spacing:.5px;
-  text-transform:uppercase
 }
-
-.badge i{
-  width:6px;
-  height:6px;
-  background:var(--orange);
-  border-radius:50%;
-  display:inline-block
-}
-
-h1{
-  font-size:52px;
-  line-height:.92;
-  letter-spacing:-2.5px;
-  font-weight:900;
-  margin:16px 0 0;
-  text-transform:lowercase
-}
-
-h1 b{
-  color:var(--orange);
-  font-weight:900
-}
-
-.sub{
-  color:var(--gray);
-  margin:14px 0;
-  line-height:1.6;
-  font-size:15px;
-  max-width:540px
-}
-
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:20px
-}
-
-.card h3{
-  font-size:12px;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-  color:var(--gray);
-  margin-bottom:10px
-}
-
-label{
-  font-size:11px;
-  color:var(--gray);
-  text-transform:uppercase;
-  letter-spacing:1px;
-  display:block;
-  margin:12px 0 6px
-}
-
-input{
-  background:var(--card2);
-  border:1px solid var(--border);
-  color:#fff;
-  padding:12px 14px;
-  border-radius:12px;
-  width:100%
-}
-
-input:focus{
-  border-color:var(--orange);
-  outline:none
-}
-
-.drop{
-  border:1px dashed #3a3a3a;
-  background:#111;
-  border-radius:16px;
-  padding:28px;
-  text-align:center;
-  cursor:pointer
-}
-
-.drop:hover{
-  border-color:var(--orange);
-  background:#1a1108
-}
-
-.drop b{color:var(--white)}
-.drop small{color:var(--gray)}
 
 .btn{
-  background:var(--orange);
-  color:#000;
-  border:0;
-  padding:14px;
-  border-radius:12px;
-  font-weight:800;
-  width:100%;
-  margin-top:14px;
-  cursor:pointer;
-  font-size:15px
+  padding:11px 18px;
+  border-radius:8px;
+  font-size:14px;
 }
 
-.btn:hover{background:var(--orange2)}
-
-.btn:disabled{
-  opacity:.5;
-  cursor:not-allowed
+.btn-orange{
+  background:#ff7a00;
+  color:#000;
 }
 
 .btn-dark{
-  background:var(--card2);
-  color:var(--white);
-  border:1px solid var(--border);
-  padding:14px;
-  border-radius:12px;
-  width:100%;
-  margin-top:14px;
-  font-weight:700;
-  cursor:pointer
+  background:#222;
+  color:#fff;
+  border:1px solid #444;
+}
+
+.btn-orange:hover{
+  background:#ff941f;
 }
 
 .btn-dark:hover{
-  border-color:var(--orange);
-  color:var(--orange)
+  background:#2c2c2c;
 }
 
-.log{
-  background:#000;
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:10px;
-  font-family:monospace;
-  font-size:11px;
-  color:var(--orange);
-  margin-top:10px;
-  display:none;
-  max-height:180px;
-  overflow:auto;
-  white-space:pre-wrap
+.hero{
+  padding:80px 6% 55px;
+  text-align:center;
+  max-width:1100px;
+  margin:auto;
 }
 
-.fileTag{
-  color:var(--orange);
-  font-size:12px;
-  margin-top:8px
+.hero h1{
+  font-size:52px;
+  line-height:1.05;
+  margin-bottom:18px;
 }
 
-.outList{
-  font-size:13px;
-  line-height:2;
-  color:var(--gray)
+.hero h1 span{
+  color:#ff7a00;
 }
 
-.outList b{color:var(--white)}
-
-.player{
-  background:var(--card2);
-  border-radius:12px;
-  padding:10px;
-  margin-top:12px
+.hero p{
+  color:#bbb;
+  font-size:18px;
+  max-width:700px;
+  margin:0 auto 30px;
+  line-height:1.6;
 }
 
-audio{width:100%}
-
-.hidden{display:none!important}
-
-.auth{
-  max-width:500px;
-  margin:35px auto;
-  padding:0 20px
-}
-
-.authTabs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-bottom:15px
-}
-
-.authTabs button{
-  padding:12px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:var(--card2);
-  color:var(--gray);
-  cursor:pointer
-}
-
-.authTabs button.active{
-  background:var(--orange);
-  color:#000;
-  border-color:var(--orange)
-}
-
-.accountBar{
-  max-width:1300px;
-  margin:15px auto;
-  padding:0 20px
-}
-
-.accountInner{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:15px;
+.hero-actions{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
-.accountName{font-weight:800}
+.container{
+  width:88%;
+  max-width:1100px;
+  margin:0 auto 60px;
+}
 
-.accountEmail{
-  color:var(--gray);
-  font-size:12px;
-  margin-top:3px
+.section{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:14px;
+  padding:28px;
+  margin-bottom:24px;
+}
+
+.section h2{
+  margin-bottom:8px;
+  font-size:25px;
+}
+
+.section-description{
+  color:#999;
+  margin-bottom:24px;
+  line-height:1.5;
+}
+
+.auth-section{
+  display:none;
+  max-width:520px;
+  margin:0 auto 40px;
+}
+
+.auth-section.active{
+  display:block;
+}
+
+.form-group{
+  margin-bottom:16px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:7px;
+  color:#ccc;
+  font-size:14px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  padding:13px;
+  background:#080808;
+  border:1px solid #333;
+  border-radius:8px;
+  color:#fff;
+  outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#ff7a00;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.auth-message{
+  margin-top:14px;
+  color:#ffb36b;
+  font-size:14px;
+}
+
+.studio{
+  display:none;
+}
+
+.studio.active{
+  display:block;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  margin-bottom:25px;
+}
+
+.product-card{
+  background:#0a0a0a;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:22px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.product-card:hover{
+  border-color:#ff7a00;
+}
+
+.product-card.selected{
+  border:2px solid #ff7a00;
+  background:#15100b;
+}
+
+.product-card h3{
+  color:#ff7a00;
+  margin-bottom:8px;
+}
+
+.product-card .price{
+  font-size:28px;
+  font-weight:800;
+  margin:10px 0;
+}
+
+.product-card p{
+  color:#999;
+  line-height:1.5;
+  font-size:14px;
 }
 
 .credits{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap
-}
-
-.credit{
-  background:var(--card2);
-  border:1px solid var(--border);
-  padding:10px 14px;
-  border-radius:12px;
-  font-size:12px
-}
-
-.credit strong{
-  color:var(--orange);
-  font-size:16px
-}
-
-.logout{
-  background:none;
-  border:1px solid var(--border);
-  color:var(--gray);
-  padding:9px 12px;
-  border-radius:9px;
-  cursor:pointer
-}
-
-.logout:hover{
-  color:#fff;
-  border-color:var(--orange)
-}
-
-.productGrid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(3,1fr);
   gap:12px;
-  margin-top:14px
+  margin-bottom:25px;
 }
 
-@media(max-width:650px){
-  .productGrid{grid-template-columns:1fr}
-}
-
-.product{
-  background:#111;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:16px;
-  cursor:pointer;
-  transition:.2s
-}
-
-.product:hover{
-  border-color:var(--orange)
-}
-
-.product.selected{
-  border-color:var(--orange);
-  box-shadow:0 0 0 1px var(--orange)
-}
-
-.productIcon{
-  font-size:28px;
-  margin-bottom:8px
-}
-
-.productTitle{
-  font-weight:900;
-  font-size:16px
-}
-
-.productPrice{
-  color:var(--orange);
-  font-size:20px;
-  font-weight:900;
-  margin-top:4px
-}
-
-.productText{
-  color:var(--gray);
-  font-size:12px;
-  line-height:1.5;
-  margin-top:6px
-}
-
-.priceBox{
-  background:#0f0f0f;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:14px;
-  margin-top:14px
-}
-
-.priceBox strong{
-  color:var(--orange);
-  font-size:20px
-}
-
-.status{
-  padding:10px;
+.credit-box{
+  background:#090909;
+  border:1px solid #2d2d2d;
   border-radius:10px;
-  background:#111;
-  border:1px solid var(--border);
-  margin-top:10px;
-  font-size:12px;
-  color:var(--gray)
+  padding:18px;
+  text-align:center;
 }
 
-.status.success{color:var(--green)}
-.status.error{color:var(--red)}
-</style></head><body><header>
-  <div class="logo">NILE <span>SONIQ</span></div>  <nav>
-    <a href="https://nilesoniq.com">Main Site</a>
-    <a class="active" href="#">AI Studio</a>
-    <a href="https://nile-soniq-u5hh.vercel.app">Library</a>
+.credit-box strong{
+  display:block;
+  font-size:26px;
+  color:#ff7a00;
+  margin-top:5px;
+}
+
+.upload-box{
+  border:1px dashed #444;
+  border-radius:12px;
+  padding:25px;
+  margin-top:15px;
+}
+
+.file-help{
+  color:#777;
+  font-size:12px;
+  margin-top:7px;
+}
+
+.project-only{
+  display:none;
+}
+
+.payment-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.results{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.result-card{
+  background:#090909;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:18px;
+}
+
+.result-card h3{
+  margin-bottom:7px;
+}
+
+.result-card p{
+  color:#999;
+  font-size:14px;
+  line-height:1.5;
+}
+
+footer{
+  text-align:center;
+  padding:35px 20px;
+  border-top:1px solid #222;
+  color:#777;
+  font-size:13px;
+}
+
+.hidden{
+  display:none !important;
+}
+
+@media(max-width:750px){
+  .hero h1{
+    font-size:38px;
+  }
+
+  .products,
+  .credits,
+  .results{
+    grid-template-columns:1fr;
+  }
+
+  header{
+    flex-wrap:wrap;
+  }
+
+  nav{
+    order:3;
+    width:100%;
+    justify-content:center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">NILE SONIQ AI</div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#studio">Mixer</a>
+    <a href="#results">What You Get</a>
   </nav>
-</header><!-- ================= AUTH ================= --><section id="authSection" class="auth">  <div class="card"><div class="badge">
-  <i></i>
-  1 FREE MIX FOR NEW USERS
-</div>
 
-<h2 style="margin-top:15px">
-  NileSoniq AI Studio
-</h2>
-
-<p class="sub">
-  Create an account and get your first mix free.
-  After that, buy individual mixes whenever you need them.
-</p>
-
-<div class="authTabs">
-
-  <button id="loginTab"
-          class="active"
-          onclick="showLogin()">
-    Login
-  </button>
-
-  <button id="signupTab"
-          onclick="showSignup()">
-    Sign Up
-  </button>
-
-</div>
-
-
-<div id="loginBox">
-
-  <label>Email</label>
-  <input id="loginEmail"
-         type="email"
-         placeholder="you@example.com">
-
-  <label>Password</label>
-  <input id="loginPassword"
-         type="password"
-         placeholder="Password">
-
-  <button class="btn"
-          onclick="login()">
-    Login
-  </button>
-
-</div>
-
-
-<div id="signupBox" class="hidden">
-
-  <label>Your Name</label>
-  <input id="signupName"
-         placeholder="Your name">
-
-  <label>Email</label>
-  <input id="signupEmail"
-         type="email"
-         placeholder="you@example.com">
-
-  <label>Password</label>
-  <input id="signupPassword"
-         type="password"
-         placeholder="Create a password">
-
-  <button class="btn"
-          onclick="signup()">
-    Create Account + Get Free Mix
-  </button>
-
-</div>
-
-<div id="authLog" class="log"></div>
-
-  </div></section><!-- ================= ACCOUNT ================= --><section id="accountSection"
-         class="accountBar hidden">  <div class="accountInner"><div>
-  <div id="accountName"
-       class="accountName">
-    User
+  <div class="auth-buttons" id="authButtons">
+    <button class="btn btn-dark" onclick="showLogin()">Sign In</button>
+    <button class="btn btn-orange" onclick="showSignup()">Sign Up</button>
   </div>
 
-  <div id="accountEmail"
-       class="accountEmail">
-    user@email.com
+  <div class="auth-buttons hidden" id="loggedInButtons">
+    <button class="btn btn-dark" onclick="logout()">Log Out</button>
   </div>
-</div>
+</header>
 
-<div class="credits">
+<section class="hero" id="home">
+  <h1>Uganda's music.<br><span>Free to mix.</span></h1>
 
-  <div class="credit">
-    Free Mix:
-    <strong id="freeCredit">1</strong>
+  <p>
+    Upload your audio or full DAW project and prepare it for professional mixing.
+    Start with one free mix, then choose the mix you need.
+  </p>
+
+  <div class="hero-actions">
+    <button class="btn btn-orange" onclick="showSignup()">Create Free Account</button>
+    <button class="btn btn-dark" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
+      See What You Get
+    </button>
+  </div>
+</section>
+
+<!-- SIGN UP -->
+<section class="section auth-section" id="signupSection">
+  <h2>Create Your Account</h2>
+  <p class="section-description">
+    Sign up to receive your free mix.
+  </p>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" id="signupEmail" placeholder="Enter your email">
   </div>
 
-  <div class="credit">
-    Paid Audio:
-    <strong id="audioCredit">0</strong>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="signupPassword" placeholder="Create a password">
   </div>
 
-  <div class="credit">
-    Paid Project:
-    <strong id="projectCredit">0</strong>
+  <button class="btn btn-orange" onclick="signup()">Sign Up</button>
+  <button class="btn btn-dark" onclick="hideAuth()">Cancel</button>
+
+  <div class="auth-message" id="signupMessage"></div>
+</section>
+
+<!-- SIGN IN -->
+<section class="section auth-section" id="loginSection">
+  <h2>Sign In</h2>
+  <p class="section-description">
+    Sign in to access your mixer and projects.
+  </p>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" id="loginEmail" placeholder="Enter your email">
   </div>
 
-</div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="loginPassword" placeholder="Enter your password">
+  </div>
 
-<button class="logout"
-        onclick="logout()">
-  Logout
-</button>
+  <button class="btn btn-orange" onclick="login()">Sign In</button>
+  <button class="btn btn-dark" onclick="hideAuth()">Cancel</button>
 
-  </div></section><!-- ================= MAIN ================= --><div id="appSection"
-     class="hero hidden">  <div><div class="badge">
-  <i></i>
-  NILE SONIQ AI MIXER
-</div>
+  <div class="auth-message" id="loginMessage"></div>
+</section>
 
-<h1>
-  Uganda's music,<br>
-  <b>free to mix.</b>
-</h1>
+<main class="container">
 
-<p class="sub">
-  Upload a finished audio file or a complete DAW project.
-  Your first mix is free. After that, audio mixing costs
-  $5 and full project mixing costs $10.
-</p>
+<section class="section studio" id="studio">
 
+  <h2>Project Mixer</h2>
 
-<!-- PRODUCT SELECTION -->
+  <p class="section-description">
+    Choose what you want to mix.
+  </p>
 
-<div class="card">
-
-  <h3>Choose What You Want To Mix</h3>
-
-  <div class="productGrid">
-
-    <div id="audioProduct"
-         class="product selected"
-         onclick="selectProduct('audio')">
-
-      <div class="productIcon">🎵</div>
-
-      <div class="productTitle">
-        Audio Mix
-      </div>
-
-      <div class="productPrice">
-        $5
-      </div>
-
-      <div class="productText">
-        Upload WAV, FLAC or MP3.
-        Get a professionally processed mix
-        and master.
-      </div>
-
+  <div class="credits">
+    <div class="credit-box">
+      Free Mix
+      <strong id="freeCredits">1</strong>
     </div>
 
+    <div class="credit-box">
+      Paid Audio
+      <strong id="audioCredits">0</strong>
+    </div>
 
-    <div id="projectProduct"
-         class="product"
-         onclick="selectProduct('project')">
+    <div class="credit-box">
+      Paid Project
+      <strong id="projectCredits">0</strong>
+    </div>
+  </div>
 
-      <div class="productIcon">🎚️</div>
+  <div class="products">
 
-      <div class="productTitle">
-        Full DAW Project
-      </div>
+    <div class="product-card selected" id="audioProduct" onclick="selectProduct('audio')">
+      <h3>Audio Mix</h3>
+      <div class="price">$5</div>
+      <p>
+        Upload WAV, FLAC or MP3 audio for a professional mix.
+        WAV or FLAC is recommended for best quality.
+      </p>
+    </div>
 
-      <div class="productPrice">
-        $10
-      </div>
-
-      <div class="productText">
-        Upload your FL Studio, Logic Pro,
-        Ableton or other complete project
-        as a ZIP.
-      </div>
-
+    <div class="product-card" id="projectProduct" onclick="selectProduct('project')">
+      <h3>Full DAW Project</h3>
+      <div class="price">$10</div>
+      <p>
+        Upload your complete FL Studio, Logic Pro, Ableton or other DAW project
+        as a ZIP file together with its audio and samples.
+      </p>
     </div>
 
   </div>
 
+  <div class="form-group">
+    <label>Song Name</label>
+    <input type="text" id="songName" placeholder="Enter song name">
+  </div>
 
-  <div class="priceBox">
+  <div class="form-group">
+    <label>Artist</label>
+    <input type="text" id="artistName" placeholder="Enter artist name">
+  </div>
 
-    Selected:
+  <div class="upload-box">
 
-    <strong id="selectedProduct">
-      Audio Mix — $5
-    </strong>
+    <div class="form-group">
+      <label id="fileLabel">Upload Audio</label>
 
-    <div id="productDescription"
-         class="productText">
-      Upload WAV, FLAC or MP3 audio.
+      <input
+        type="file"
+        id="projectFile"
+        accept=".wav,.flac,.mp3"
+      >
+
+      <div class="file-help" id="fileHelp">
+        Supported audio: WAV, FLAC and MP3. WAV/FLAC recommended.
+      </div>
+    </div>
+
+    <div class="form-group project-only" id="revisionGroup">
+      <label>Revision / Mixing Notes</label>
+
+      <textarea
+        id="revisionNote"
+        placeholder="Tell the mixing engineer what you want changed or improved."
+      ></textarea>
     </div>
 
   </div>
 
-</div>
-
-
-<!-- UPLOAD -->
-
-<div class="card"
-     style="margin-top:14px">
-
-  <h3>Upload To Studio Vault</h3>
-
-  <div style="display:grid;
-              grid-template-columns:1fr 1fr;
-              gap:10px">
-
-    <div>
-
-      <label>Song Name</label>
-
-      <input id="songName"
-             placeholder="Ghetto Love">
-
-    </div>
-
-    <div>
-
-      <label>Artist</label>
-
-      <input id="artist"
-             placeholder="Kato Music">
-
-    </div>
-
-  </div>
-
-
-  <label id="fileLabel">
-    Audio File
-  </label>
-
-  <div id="drop"
-       class="drop"
-       onclick="document
-         .getElementById('file')
-         .click()">
-
-    <b id="dropTitle">
-      Drop audio here
-    </b>
-
-    <br>
-
-    <small id="dropText">
-      WAV, FLAC or MP3
-    </small>
-
-    <input type="file"
-           id="file"
-           hidden
-           accept=".wav,.flac,.mp3">
-
-  </div>
-
-
-  <div id="fname"
-       class="fileTag">
-  </div>
-
-
-  <label>
-    Revision Note
-  </label>
-
-  <input id="msg"
-         placeholder="v1: first mix">
-
-
-  <button id="upBtn"
-          class="btn"
-          onclick="upload()">
-
-    Upload + Start Mix →
-
+  <button
+    class="btn btn-orange"
+    style="margin-top:18px"
+    onclick="upload()"
+  >
+    Upload + Start Mix
   </button>
 
+  <div class="payment-buttons">
 
-  <div id="upLog"
-       class="log">
-  </div>
+    <button class="btn btn-dark" onclick="buyMix('audio')">
+      Buy 1 Audio Mix — $5
+    </button>
 
-</div>
-
-
-<!-- REVISION -->
-
-<div id="revisionCard"
-     class="card"
-     style="margin-top:14px">
-
-  <h3>
-    Add New Revision / Collab
-  </h3>
-
-  <label>
-    Vault ID
-  </label>
-
-  <input id="vaultId"
-         placeholder="nilesoniq-ghetto-love-...">
-
-  <label>
-    New File
-  </label>
-
-  <input type="file"
-         id="file2">
-
-  <label>
-    What's new?
-  </label>
-
-  <input id="msg2"
-         placeholder="Added hook vocals">
-
-  <button class="btn-dark"
-          onclick="addVersion()">
-
-    Add Revision + Combine
-
-  </button>
-
-  <div id="vLog"
-       class="log">
-  </div>
-
-</div>
-
-  </div>  <!-- ================= RIGHT COLUMN ================= -->  <div><div class="card">
-
-  <h3>
-    What You Get Back
-  </h3>
-
-  <div class="outList"
-       style="margin-top:10px">
-
-    ✓ <b>Master.wav</b> — final master<br>
-
-    ✓ <b>Mix.wav</b> — clean mixdown<br>
-
-    ✓ <b>Mixed Stems</b> — processed stems<br>
-
-    ✓ <b>Original Files</b> — untouched backup<br>
-
-    ✓ <b>Studio Vault</b> — project history<br>
-
-  </div>
-
-
-  <div class="player">
-
-    <label style="margin:0 0 6px">
-      Preview Master
-    </label>
-
-    <audio id="player"
-           controls>
-    </audio>
-
-    <button id="dlBtn"
-            class="btn-dark"
-            style="display:none">
-
-      ⬇ Download Full Vault
-
+    <button class="btn btn-dark" onclick="buyMix('project')">
+      Buy 1 Project Mix — $10
     </button>
 
   </div>
 
-</div>
+  <div class="auth-message" id="studioMessage"></div>
 
+</section>
 
-<!-- PAYMENT -->
+<section class="section" id="results">
 
-<div class="card"
-     style="margin-top:14px">
+  <h2>What You Get Back</h2>
 
-  <h3>
-    Buy Another Mix
-  </h3>
+  <p class="section-description">
+    Your completed project will be stored in your secure project vault.
+  </p>
 
-  <div class="productGrid">
+  <div class="results">
 
-    <div class="product"
-         onclick="buyMix('audio')">
-
-      <div class="productIcon">
-        🎵
-      </div>
-
-      <div class="productTitle">
-        1 Audio Mix
-      </div>
-
-      <div class="productPrice">
-        $5
-      </div>
-
-      <div class="productText">
-        One WAV, FLAC or MP3 mix.
-      </div>
-
-      <button class="btn">
-        Buy Audio Mix
-      </button>
-
+    <div class="result-card">
+      <h3>Master.wav</h3>
+      <p>Final mastered WAV output.</p>
     </div>
 
+    <div class="result-card">
+      <h3>Mix.wav</h3>
+      <p>Final mixed WAV output before mastering.</p>
+    </div>
 
-    <div class="product"
-         onclick="buyMix('project')">
+    <div class="result-card">
+      <h3>NileMix Studio File</h3>
+      <p>Project files associated with your mix.</p>
+    </div>
 
-      <div class="productIcon">
-        🎚️
-      </div>
+    <div class="result-card">
+      <h3>Mixed Stems</h3>
+      <p>Processed stems where available.</p>
+    </div>
 
-      <div class="productTitle">
-        1 Project Mix
-      </div>
+    <div class="result-card">
+      <h3>Original Project</h3>
+      <p>Your original uploaded files are preserved.</p>
+    </div>
 
-      <div class="productPrice">
-        $10
-      </div>
-
-      <div class="productText">
-        One complete DAW project mix.
-      </div>
-
-      <button class="btn">
-        Buy Project Mix
-      </button>
-
+    <div class="result-card">
+      <h3>History</h3>
+      <p>Keep track of versions and revisions.</p>
     </div>
 
   </div>
 
+</section>
 
-  <div id="paymentStatus"
-       class="status">
+</main>
 
-    Payment status will appear here.
+<footer>
+  © NILE SONIQ AI
+</footer>
 
-  </div>
+<script>
 
-</div>
+/* =========================================
+   BACKEND URL
+   ========================================= */
 
-
-<div class="card"
-     style="margin-top:14px;
-            background:#0f0f0f">
-
-  <h3>
-    How It Works
-  </h3>
-
-  <div class="outList"
-       style="font-size:12px">
-
-    <span style="color:var(--orange)">
-      1.
-    </span>
-    Sign up → receive 1 free mix<br>
-
-    <span style="color:var(--orange)">
-      2.
-    </span>
-    Choose Audio or Project<br>
-
-    <span style="color:var(--orange)">
-      3.
-    </span>
-    Upload your files<br>
-
-    <span style="color:var(--orange)">
-      4.
-    </span>
-    First mix uses your free credit<br>
-
-    <span style="color:var(--orange)">
-      5.
-    </span>
-    Audio after that = $5<br>
-
-    <span style="color:var(--orange)">
-      6.
-    </span>
-    Full project after that = $10<br>
-
-    <span style="color:var(--orange)">
-      7.
-    </span>
-    Payment gives exactly one mix credit
-
-  </div>
-
-</div>
-
-
-<button class="btn-dark"
-        onclick="window.open(
-          'https://nilesoniq.com'
-        )">
-
-  ← Back to nilesoniq.com
-
-</button>
-
-  </div></div><script>
-
-/*
-===========================================================
-NILE SONIQ AI STUDIO
-===========================================================
-
-THE BACKEND HAS NOT BEEN CREATED YET.
-
-We will replace this URL after creating the backend.
-
-DO NOT PUT PAYMENT SECRETS OR SERVICE-ROLE KEYS HERE.
-===========================================================
-*/
-
-const API_URL =
-  "https://YOUR-NILEMIX-BACKEND.workers.dev";
-
+const API_URL = "https://YOUR-NILEMIX-BACKEND.workers.dev";
 
 let currentUser = null;
-
 let selectedProduct = "audio";
 
 
-/* ================= AUTH ================= */
-
-function showLogin(){
-
-  document
-    .getElementById("loginBox")
-    .classList.remove("hidden");
-
-  document
-    .getElementById("signupBox")
-    .classList.add("hidden");
-
-  document
-    .getElementById("loginTab")
-    .classList.add("active");
-
-  document
-    .getElementById("signupTab")
-    .classList.remove("active");
-
-}
-
+/* =========================================
+   AUTH DISPLAY
+   ========================================= */
 
 function showSignup(){
 
-  document
-    .getElementById("signupBox")
-    .classList.remove("hidden");
+  document.getElementById("loginSection").classList.remove("active");
 
-  document
-    .getElementById("loginBox")
-    .classList.add("hidden");
+  document.getElementById("signupSection").classList.add("active");
 
-  document
-    .getElementById("signupTab")
-    .classList.add("active");
+  document.getElementById("signupSection")
+    .scrollIntoView({behavior:"smooth"});
+}
 
-  document
-    .getElementById("loginTab")
-    .classList.remove("active");
+
+function showLogin(){
+
+  document.getElementById("signupSection").classList.remove("active");
+
+  document.getElementById("loginSection").classList.add("active");
+
+  document.getElementById("loginSection")
+    .scrollIntoView({behavior:"smooth"});
+}
+
+
+function hideAuth(){
+
+  document.getElementById("signupSection").classList.remove("active");
+  document.getElementById("loginSection").classList.remove("active");
 
 }
 
 
-/* ================= PRODUCT ================= */
+/* =========================================
+   PRODUCT SELECTION
+   ========================================= */
 
 function selectProduct(type){
 
   selectedProduct = type;
 
-  const audio =
+  const audioCard =
     document.getElementById("audioProduct");
 
-  const project =
+  const projectCard =
     document.getElementById("projectProduct");
 
-  const label =
+  const fileInput =
+    document.getElementById("projectFile");
+
+  const fileLabel =
     document.getElementById("fileLabel");
 
-  const title =
-    document.getElementById("dropTitle");
+  const fileHelp =
+    document.getElementById("fileHelp");
 
-  const text =
-    document.getElementById("dropText");
-
-  const selected =
-    document.getElementById("selectedProduct");
-
-  const description =
-    document.getElementById("productDescription");
-
-  const revision =
-    document.getElementById("revisionCard");
-
-
-  audio.classList.remove("selected");
-  project.classList.remove("selected");
-
+  const revisionGroup =
+    document.getElementById("revisionGroup");
 
   if(type === "audio"){
 
-    audio.classList.add("selected");
+    audioCard.classList.add("selected");
+    projectCard.classList.remove("selected");
 
-    selected.textContent =
-      "Audio Mix — $5";
+    fileInput.accept = ".wav,.flac,.mp3";
 
-    description.textContent =
-      "Upload WAV, FLAC or MP3 audio.";
+    fileLabel.textContent = "Upload Audio";
 
-    label.textContent =
-      "Audio File";
+    fileHelp.textContent =
+      "Supported audio: WAV, FLAC and MP3. WAV/FLAC recommended.";
 
-    title.textContent =
-      "Drop audio here";
-
-    text.textContent =
-      "WAV, FLAC or MP3";
-
-    document
-      .getElementById("file")
-      .accept =
-      ".wav,.flac,.mp3";
-
-    revision.classList.add("hidden");
+    revisionGroup.style.display = "none";
 
   }else{
 
-    project.classList.add("selected");
+    audioCard.classList.remove("selected");
+    projectCard.classList.add("selected");
 
-    selected.textContent =
-      "Full DAW Project — $10";
+    fileInput.accept = ".zip";
 
-    description.textContent =
-      "Upload a complete FL Studio, Logic Pro, Ableton or similar project as a ZIP.";
+    fileLabel.textContent =
+      "Upload Full DAW Project ZIP";
 
-    label.textContent =
-      "Complete DAW Project";
+    fileHelp.textContent =
+      "ZIP should contain the complete FL Studio, Logic Pro, Ableton or other DAW project and required audio/samples.";
 
-    title.textContent =
-      "Drop project ZIP here";
-
-    text.textContent =
-      "FL Studio, Logic Pro, Ableton project + audio files";
-
-    document
-      .getElementById("file")
-      .accept =
-      ".zip";
-
-    revision.classList.remove("hidden");
-
+    revisionGroup.style.display = "block";
   }
 
-
-  document.getElementById("file").value = "";
-
-  document.getElementById("fname").textContent = "";
-
+  fileInput.value = "";
 }
 
 
-/* ================= SIGN UP ================= */
+/* =========================================
+   SIGN UP
+   ========================================= */
 
 async function signup(){
 
-  const name =
-    document
-      .getElementById("signupName")
-      .value
-      .trim();
-
   const email =
-    document
-      .getElementById("signupEmail")
-      .value
-      .trim();
+    document.getElementById("signupEmail").value.trim();
 
   const password =
-    document
-      .getElementById("signupPassword")
-      .value;
+    document.getElementById("signupPassword").value;
 
-  const log =
-    document.getElementById("authLog");
+  const message =
+    document.getElementById("signupMessage");
 
+  if(!email || !password){
 
-  log.style.display = "block";
-
-
-  if(!name || !email || !password){
-
-    log.textContent =
-      "❌ Please fill in all fields.";
+    message.textContent =
+      "Please enter your email and password.";
 
     return;
-
   }
 
-
-  if(password.length < 6){
-
-    log.textContent =
-      "❌ Password must be at least 6 characters.";
-
-    return;
-
-  }
-
+  message.textContent = "Creating your account...";
 
   try{
 
-    const response =
-      await fetch(
-        `${API_URL}/auth/signup`,
-        {
-          method:"POST",
+    const response = await fetch(
+      API_URL + "/auth/signup",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          email:email,
+          password:password
+        })
+      }
+    );
 
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-            name,
-            email,
-            password
-          })
-        }
-      );
-
-
-    const data =
-      await response.json();
-
+    const data = await response.json();
 
     if(!response.ok){
 
-      throw new Error(
-        data.message ||
-        "Signup failed."
-      );
+      message.textContent =
+        data.error || "Sign up failed.";
 
+      return;
     }
 
-
-    log.textContent =
-      "✅ Account created. Your first mix is free.";
-
-    showLogin();
+    message.textContent =
+      "Account created successfully. You can now sign in.";
 
   }catch(error){
 
-    log.textContent =
-      "❌ " + error.message;
+    message.textContent =
+      "Unable to connect to the server.";
 
   }
-
 }
 
 
-/* ================= LOGIN ================= */
+/* =========================================
+   SIGN IN
+   ========================================= */
 
 async function login(){
 
   const email =
-    document
-      .getElementById("loginEmail")
-      .value
-      .trim();
+    document.getElementById("loginEmail").value.trim();
 
   const password =
-    document
-      .getElementById("loginPassword")
-      .value;
+    document.getElementById("loginPassword").value;
 
-  const log =
-    document.getElementById("authLog");
-
-
-  log.style.display = "block";
-
+  const message =
+    document.getElementById("loginMessage");
 
   if(!email || !password){
 
-    log.textContent =
-      "❌ Enter your email and password.";
+    message.textContent =
+      "Please enter your email and password.";
 
     return;
-
   }
 
+  message.textContent = "Signing in...";
 
   try{
 
-    const response =
-      await fetch(
-        `${API_URL}/auth/login`,
-        {
-          method:"POST",
+    const response = await fetch(
+      API_URL + "/auth/login",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          email:email,
+          password:password
+        })
+      }
+    );
 
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-            email,
-            password
-          })
-        }
-      );
-
-
-    const data =
-      await response.json();
-
+    const data = await response.json();
 
     if(!response.ok){
 
-      throw new Error(
-        data.message ||
-        "Login failed."
-      );
+      message.textContent =
+        data.error || "Sign in failed.";
 
+      return;
     }
 
+    currentUser = data;
 
-    currentUser = data.user;
+    hideAuth();
 
-    openStudio(data);
+    document.getElementById("authButtons")
+      .classList.add("hidden");
+
+    document.getElementById("loggedInButtons")
+      .classList.remove("hidden");
+
+    document.getElementById("studio")
+      .classList.add("active");
+
+    updateCredits(data);
+
+    document.getElementById("studio")
+      .scrollIntoView({behavior:"smooth"});
 
   }catch(error){
 
-    log.textContent =
-      "❌ " + error.message;
+    message.textContent =
+      "Unable to connect to the server.";
 
   }
-
 }
 
 
-/* ================= OPEN STUDIO ================= */
-
-function openStudio(data){
-
-  document
-    .getElementById("authSection")
-    .classList.add("hidden");
-
-  document
-    .getElementById("accountSection")
-    .classList.remove("hidden");
-
-  document
-    .getElementById("appSection")
-    .classList.remove("hidden");
-
-
-  document
-    .getElementById("accountName")
-    .textContent =
-      data.user.name ||
-      "NileSoniq User";
-
-
-  document
-    .getElementById("accountEmail")
-    .textContent =
-      data.user.email ||
-      "";
-
-
-  updateCredits(data);
-
-}
-
-
-/* ================= CREDITS ================= */
-
-function updateCredits(data){
-
-  document
-    .getElementById("freeCredit")
-    .textContent =
-      Number(data.freeMixes || 0);
-
-  document
-    .getElementById("audioCredit")
-    .textContent =
-      Number(data.audioMixes || 0);
-
-  document
-    .getElementById("projectCredit")
-    .textContent =
-      Number(data.projectMixes || 0);
-
-}
-
-
-/* ================= LOGOUT ================= */
+/* =========================================
+   LOG OUT
+   ========================================= */
 
 function logout(){
 
   currentUser = null;
 
-  document
-    .getElementById("authSection")
+  document.getElementById("studio")
+    .classList.remove("active");
+
+  document.getElementById("loggedInButtons")
+    .classList.add("hidden");
+
+  document.getElementById("authButtons")
     .classList.remove("hidden");
 
-  document
-    .getElementById("accountSection")
-    .classList.add("hidden");
-
-  document
-    .getElementById("appSection")
-    .classList.add("hidden");
-
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 }
 
 
-/* ================= FILE ================= */
+/* =========================================
+   CREDIT DISPLAY
+   ========================================= */
 
-const drop =
-  document.getElementById("drop");
+function updateCredits(data){
 
-const fi =
-  document.getElementById("file");
+  document.getElementById("freeCredits").textContent =
+    data.freeCredits ?? 0;
 
+  document.getElementById("audioCredits").textContent =
+    data.audioCredits ?? 0;
 
-drop.addEventListener(
-  "dragover",
-  e => {
-
-    e.preventDefault();
-
-    drop.style.borderColor =
-      "#ff6b00";
-
-  }
-);
-
-
-drop.addEventListener(
-  "dragleave",
-  () => {
-
-    drop.style.borderColor = "";
-
-  }
-);
-
-
-drop.addEventListener(
-  "drop",
-  e => {
-
-    e.preventDefault();
-
-    fi.files =
-      e.dataTransfer.files;
-
-    showFile();
-
-  }
-);
-
-
-fi.addEventListener(
-  "change",
-  showFile
-);
-
-
-function showFile(){
-
-  const f =
-    fi.files[0];
-
-  if(f){
-
-    document
-      .getElementById("fname")
-      .textContent =
-      `📦 ${f.name} — ${(f.size/1024/1024).toFixed(2)} MB`;
-
-  }
-
+  document.getElementById("projectCredits").textContent =
+    data.projectCredits ?? 0;
 }
 
 
-/* ================= UPLOAD ================= */
+/* =========================================
+   UPLOAD
+   ========================================= */
 
 async function upload(){
 
-  const f =
-    fi.files[0];
+  if(!currentUser){
 
-  if(!f){
-
-    alert(
-      selectedProduct === "audio"
-      ? "Select an audio file first."
-      : "Select your project ZIP first."
-    );
+    showLogin();
 
     return;
-
   }
 
+  const songName =
+    document.getElementById("songName").value.trim();
 
-  const btn =
-    document.getElementById("upBtn");
+  const artist =
+    document.getElementById("artistName").value.trim();
 
-  const log =
-    document.getElementById("upLog");
+  const file =
+    document.getElementById("projectFile").files[0];
 
+  const message =
+    document.getElementById("revisionNote").value.trim();
 
-  btn.disabled = true;
+  const studioMessage =
+    document.getElementById("studioMessage");
 
-  btn.textContent =
-    "Checking Mix Credit...";
+  if(!songName || !artist || !file){
 
-  log.style.display = "block";
+    studioMessage.textContent =
+      "Please enter the song name, artist and upload your file.";
 
-  log.textContent =
-    "→ Checking your available mix credit...\n";
+    return;
+  }
 
+  studioMessage.textContent =
+    "Uploading project...";
+
+  const formData = new FormData();
+
+  formData.append(
+    "productType",
+    selectedProduct
+  );
+
+  formData.append(
+    "songName",
+    songName
+  );
+
+  formData.append(
+    "artist",
+    artist
+  );
+
+  formData.append(
+    "message",
+    message
+  );
+
+  formData.append(
+    "project",
+    file
+  );
 
   try{
 
-    const fd =
-      new FormData();
-
-
-    fd.append(
-      "productType",
-      selectedProduct
+    const response = await fetch(
+      API_URL + "/upload",
+      {
+        method:"POST",
+        body:formData
+      }
     );
 
-    fd.append(
-      "songName",
-      document.getElementById("songName").value ||
-      "untitled"
-    );
-
-    fd.append(
-      "artist",
-      document.getElementById("artist").value ||
-      "unknown"
-    );
-
-    fd.append(
-      "message",
-      document.getElementById("msg").value ||
-      "v1"
-    );
-
-    fd.append(
-      "project",
-      f
-    );
-
-
-    const response =
-      await fetch(
-        `${API_URL}/upload`,
-        {
-          method:"POST",
-          body:fd
-        }
-      );
-
-
-    const data =
-      await response.json();
-
+    const data = await response.json();
 
     if(response.status === 402){
 
-      log.textContent =
+      studioMessage.textContent =
         selectedProduct === "audio"
-
-        ? "❌ No Audio Mix credit available.\n\nAudio Mix: $5"
-
-        : "❌ No Project Mix credit available.\n\nProject Mix: $10";
-
+        ? "You need an Audio Mix credit. One Audio Mix costs $5."
+        : "You need a Project Mix credit. One Project Mix costs $10.";
 
       return;
-
     }
-
 
     if(!response.ok){
 
-      throw new Error(
-        data.message ||
-        "Upload failed."
-      );
+      studioMessage.textContent =
+        data.error || "Upload failed.";
 
+      return;
     }
 
+    studioMessage.textContent =
+      "Upload received. Your mix job has been created.";
 
-    log.textContent =
-      "✅ Upload successful.\n" +
-      "→ Mixing job created.\n\n" +
-      JSON.stringify(
-        data,
-        null,
-        2
-      );
-
-
-    if(data.repoName){
-
-      document
-        .getElementById("vaultId")
-        .value =
-        data.repoName;
-
-    }
-
-
-    if(data.masterUrl){
-
-      document
-        .getElementById("player")
-        .src =
-        data.masterUrl;
-
-    }
-
-
-    updateCredits({
-
-      freeMixes:data.freeMixes,
-
-      audioMixes:data.audioMixes,
-
-      projectMixes:data.projectMixes
-
-    });
-
+    updateCredits(data);
 
   }catch(error){
 
-    log.textContent =
-      "❌ " + error.message;
-
-  }finally{
-
-    btn.disabled = false;
-
-    btn.textContent =
-      "Upload + Start Mix →";
+    studioMessage.textContent =
+      "Unable to connect to the server.";
 
   }
-
 }
 
 
-/* ================= BUY MIX ================= */
+/* =========================================
+   PAYMENT
+   ========================================= */
 
 async function buyMix(type){
 
-  const status =
-    document.getElementById(
-      "paymentStatus"
-    );
+  if(!currentUser){
 
+    showLogin();
 
-  const price =
+    return;
+  }
+
+  const amount =
     type === "audio"
     ? 5
     : 10;
 
+  const studioMessage =
+    document.getElementById("studioMessage");
 
-  status.className =
-    "status";
-
-  status.textContent =
-    `Creating secure $${price} payment...`;
-
+  studioMessage.textContent =
+    "Preparing payment...";
 
   try{
 
-    const response =
-      await fetch(
-        `${API_URL}/payments/create`,
-        {
-          method:"POST",
+    const response = await fetch(
+      API_URL + "/payments/create",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          productType:type,
+          amount:amount,
+          currency:"USD"
+        })
+      }
+    );
 
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-
-            productType:type,
-
-            amount:price,
-
-            currency:"USD"
-
-          })
-
-        }
-      );
-
-
-    const data =
-      await response.json();
-
+    const data = await response.json();
 
     if(!response.ok){
 
-      throw new Error(
-        data.message ||
-        "Unable to create payment."
-      );
+      studioMessage.textContent =
+        data.error || "Unable to start payment.";
 
+      return;
     }
 
-
-    if(data.checkoutUrl){
+    if(data.paymentUrl){
 
       window.location.href =
-        data.checkoutUrl;
+        data.paymentUrl;
 
     }else{
 
-      status.textContent =
-        "Payment request created.";
+      studioMessage.textContent =
+        "Payment was created.";
 
     }
 
   }catch(error){
 
-    status.className =
-      "status error";
-
-    status.textContent =
-      "❌ " + error.message;
+    studioMessage.textContent =
+      "Unable to connect to the payment server.";
 
   }
-
 }
 
 
-/* ================= REVISION ================= */
+/* =========================================
+   ADD VERSION / REVISION
+   ========================================= */
 
-async function addVersion(){
+async function addVersion(projectId, file){
 
-  const f =
-    document
-      .getElementById("file2")
-      .files[0];
+  if(!currentUser){
 
-  const vault =
-    document
-      .getElementById("vaultId")
-      .value
-      .trim();
-
-
-  if(!f || !vault){
-
-    alert(
-      "You need the Vault ID and new file."
-    );
+    showLogin();
 
     return;
-
   }
 
+  const formData = new FormData();
 
-  const log =
-    document.getElementById("vLog");
+  formData.append(
+    "projectId",
+    projectId
+  );
 
-
-  log.style.display =
-    "block";
-
-  log.textContent =
-    "→ Sending revision...\n";
-
+  formData.append(
+    "project",
+    file
+  );
 
   try{
 
-    const fd =
-      new FormData();
-
-
-    fd.append(
-      "repoName",
-      vault
+    const response = await fetch(
+      API_URL + "/add-version",
+      {
+        method:"POST",
+        body:formData
+      }
     );
 
-    fd.append(
-      "message",
-      document
-        .getElementById("msg2")
-        .value ||
-      "New revision"
-    );
-
-    fd.append(
-      "project",
-      f
-    );
-
-
-    const response =
-      await fetch(
-        `${API_URL}/add-version`,
-        {
-          method:"POST",
-          body:fd
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.message ||
-        "Revision failed."
-      );
-
-    }
-
-
-    log.textContent =
-      "✅ Revision added.\n\n" +
-      JSON.stringify(
-        data,
-        null,
-        2
-      );
+    return await response.json();
 
   }catch(error){
 
-    log.textContent =
-      "❌ " + error.message;
-
+    return {
+      error:"Unable to connect to the server."
+    };
   }
-
 }
 
-</script></body>
-</html>
-```This is the "index.html" direction we should keep. It doesn't claim to mix anything yet—the actual mixing, credit enforcement, user accounts, and payment verification will be done securely in the backend.
 
-Next: we should create the backend/database first, because that's what will make the "$5 audio / $10 project / 1 free mix" system real. I recommend we build that next before touching the mixer engine.
+/* =========================================
+   INITIAL PRODUCT STATE
+   ========================================= */
+
+selectProduct("audio");
+
+</script>
+
+</body>
+</html>
